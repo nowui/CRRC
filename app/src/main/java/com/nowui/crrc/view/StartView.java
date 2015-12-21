@@ -58,6 +58,8 @@ public class StartView extends RelativeLayout {
         View.inflate(context, R.layout.view_start, this);
 
         contentRelativeLayout = new RelativeLayout(myContext);
+        contentRelativeLayout.setClickable(true);
+        contentRelativeLayout.setFocusable(true);
 
         RelativeLayout.LayoutParams contentRelativeLayoutParams = new RelativeLayout.LayoutParams(Helper.Width, Helper.Height);
         contentRelativeLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);

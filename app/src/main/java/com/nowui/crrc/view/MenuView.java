@@ -79,11 +79,17 @@ public class MenuView extends RelativeLayout {
     private void initBottom() {
         ImageView bottomImageView = new ImageView(myContext);
         bottomImageView.setImageDrawable(getResources().getDrawable(R.mipmap.menu_bottom));
+        if(typeString.equals("right_right")) {
+            bottomImageView.setImageDrawable(getResources().getDrawable(R.mipmap.menu_bottom_right));
+        }
 
         RelativeLayout.LayoutParams bottomImageViewLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         if(typeString.equals("bottom")) {
             bottomImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
             bottomImageViewLayoutParams.bottomMargin = Helper.formatPix(myContext, 55);
+        } else if(typeString.equals("right_right")) {
+            bottomImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+            bottomImageViewLayoutParams.topMargin = Helper.formatPix(myContext, -5);
         } else {
             bottomImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
             bottomImageViewLayoutParams.topMargin = Helper.formatPix(myContext, 55);
@@ -148,6 +154,9 @@ public class MenuView extends RelativeLayout {
         } else if(typeString.equals("bottom")) {
             titleImageButtonLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
             titleImageButtonLayoutParams.leftMargin = Helper.formatPix(myContext, 10);
+        } else if(typeString.equals("right_right")) {
+            titleImageButtonLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+            titleImageButtonLayoutParams.leftMargin = Helper.formatPix(myContext, 40);
         }
         this.addView(titleImageButton, titleImageButtonLayoutParams);
     }
@@ -157,6 +166,8 @@ public class MenuView extends RelativeLayout {
         locationImageButton.setImageDrawable(getResources().getDrawable(R.mipmap.menu_location_top));
         if(typeString.equals("bottom")) {
             locationImageButton.setImageDrawable(getResources().getDrawable(R.mipmap.menu_location_bottom));
+        } else if(typeString.equals("right_right")) {
+            locationImageButton.setImageDrawable(getResources().getDrawable(R.mipmap.menu_location_right));
         }
         locationImageButton.getBackground().setAlpha(0);
         locationImageButton.setOnClickListener(new OnClickListener() {
@@ -191,6 +202,9 @@ public class MenuView extends RelativeLayout {
         AnimationSet set = new AnimationSet(true);
 
         TranslateAnimation translateAnimation = new TranslateAnimation(0, 0, 0, Helper.formatPix(myContext, 10));
+        if(typeString.equals("right_right")) {
+            translateAnimation = new TranslateAnimation(0, Helper.formatPix(myContext, 10), 0, 0);
+        }
         translateAnimation.setDuration(500);
         translateAnimation.setRepeatCount(Animation.INFINITE);
         translateAnimation.setRepeatMode(Animation.REVERSE);

@@ -64,6 +64,8 @@ public class IndexlView extends RelativeLayout {
         View.inflate(context, R.layout.view_index, this);
 
         contentRelativeLayout = new RelativeLayout(myContext);
+        contentRelativeLayout.setClickable(true);
+        contentRelativeLayout.setFocusable(true);
 
         RelativeLayout.LayoutParams contentRelativeLayoutParams = new RelativeLayout.LayoutParams(Helper.Width, Helper.Height);
         contentRelativeLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
@@ -117,10 +119,10 @@ public class IndexlView extends RelativeLayout {
             }
         };
 
-        String jsonString = "[{\"type\": \"left\", \"tag\": 0, \"title\": \"menu_title_" + Helper.Language + "_" + Helper.Version + "_0_0\", \"top\": 650, \"left\": 648 }, {\"type\": \"left\", \"tag\": 1, \"title\": \"menu_title_" + Helper.Language + "_" + Helper.Version + "_0_1\", \"top\": 560, \"left\": 820 }, {\"type\": \"right\", \"tag\": 2, \"title\": \"menu_title_" + Helper.Language + "_" + Helper.Version + "_0_2\", \"top\": 360, \"left\": 845 }, {\"type\": \"left\", \"tag\": 3, \"title\": \"menu_title_" + Helper.Language + "_" + Helper.Version + "_0_3\", \"top\": 320, \"left\": 1233 }, {\"type\": \"left\", \"tag\": 4, \"title\": \"menu_title_" + Helper.Language + "_" + Helper.Version + "_0_4\", \"top\": 405, \"left\": 1250 }]";
+        String jsonString = "[{\"type\": \"left\", \"tag\": 0, \"title\": \"menu_title_" + Helper.Language + "_" + Helper.Version + "_0_0\", \"top\": 650, \"left\": 648 }, {\"type\": \"left\", \"tag\": 1, \"title\": \"menu_title_" + Helper.Language + "_" + Helper.Version + "_0_1\", \"top\": 560, \"left\": 820 }, {\"type\": \"right\", \"tag\": 2, \"title\": \"menu_title_" + Helper.Language + "_" + Helper.Version + "_0_2\", \"top\": 360, \"left\": 845 }, {\"type\": \"left\", \"tag\": 3, \"title\": \"menu_title_" + Helper.Language + "_" + Helper.Version + "_0_3\", \"top\": 320, \"left\": 1233 }, {\"type\": \"right_right\", \"tag\": 4, \"title\": \"menu_title_" + Helper.Language + "_" + Helper.Version + "_0_4\", \"top\": 440, \"left\": 1272 }]";
 
         if (tag == 1) {
-            jsonString = "[{\"type\": \"bottom\", \"tag\": 0, \"title\": \"menu_title_" + Helper.Language + "_" + Helper.Version + "_1_0\", \"top\": 672, \"left\": 720 }, {\"type\": \"right\", \"tag\": 1, \"title\": \"menu_title_" + Helper.Language + "_" + Helper.Version + "_1_1\", \"top\": 570, \"left\": 605 }, {\"type\": \"right\", \"tag\": 2, \"title\": \"menu_title_" + Helper.Language + "_" + Helper.Version + "_1_2\", \"top\": 525, \"left\": 805 }, {\"type\": \"bottom\", \"tag\": 3, \"title\": \"menu_title_" + Helper.Language + "_" + Helper.Version + "_1_3\", \"top\": 565, \"left\": 1193 }, {\"type\": \"right\", \"tag\": 4, \"title\": \"menu_title_" + Helper.Language + "_" + Helper.Version + "_1_4\", \"top\": 480, \"left\": 950 }, {\"type\": \"left\", \"tag\": 5, \"title\": \"menu_title_" + Helper.Language + "_" + Helper.Version + "_1_5\", \"top\": 470, \"left\": 1325 }]";
+            jsonString = "[{\"type\": \"bottom\", \"tag\": 0, \"title\": \"menu_title_" + Helper.Language + "_" + Helper.Version + "_1_0\", \"top\": 672, \"left\": 720 }, {\"type\": \"right\", \"tag\": 1, \"title\": \"menu_title_" + Helper.Language + "_" + Helper.Version + "_1_1\", \"top\": 570, \"left\": 605 }, {\"type\": \"right\", \"tag\": 2, \"title\": \"menu_title_" + Helper.Language + "_" + Helper.Version + "_1_2\", \"top\": 527, \"left\": 803 }, {\"type\": \"bottom\", \"tag\": 3, \"title\": \"menu_title_" + Helper.Language + "_" + Helper.Version + "_1_3\", \"top\": 565, \"left\": 1193 }, {\"type\": \"right\", \"tag\": 4, \"title\": \"menu_title_" + Helper.Language + "_" + Helper.Version + "_1_4\", \"top\": 480, \"left\": 950 }, {\"type\": \"right_right\", \"tag\": 5, \"title\": \"menu_title_" + Helper.Language + "_" + Helper.Version + "_1_5\", \"top\": 512, \"left\": 1345 }]";
         }
 
         JSONArray jsonArray = JSON.parseArray(jsonString);

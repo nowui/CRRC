@@ -74,6 +74,8 @@ public class MainView extends RelativeLayout {
         View.inflate(context, R.layout.view_main, this);
 
         contentRelativeLayout = new RelativeLayout(myContext);
+        contentRelativeLayout.setClickable(true);
+        contentRelativeLayout.setFocusable(true);
         //contentRelativeLayout.setBackgroundColor(Color.parseColor("#ff0000"));
 
         RelativeLayout.LayoutParams contentRelativeLayoutParams = new RelativeLayout.LayoutParams(Helper.Width, Helper.Height);
