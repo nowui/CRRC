@@ -21,8 +21,13 @@ public class Helper {
     public static final String WebUrl = "http://daning-app.nowui.com";
     //public static final String WebUrl = "http://192.168.200.2:8088";
 
-    public static final int Width = 1280;
-    public static final int Height = 720;
+    public static int Width = 1920;
+    public static int Height = 1080;
+
+    public static final String Language = "en";
+    //public static final String Language = "zh";
+    public static final String Version = "cut";
+    //public static final String Version = "all";
 
     //Key
     public static final String KeyId = "id";
@@ -139,7 +144,7 @@ public class Helper {
         return wm.getDefaultDisplay().getHeight();
     }
 
-    public static int dip2px(Context context, float dpValue) {
+    /*public static int dip2px(Context context, float dpValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
     }
@@ -147,6 +152,12 @@ public class Helper {
     public static int px2dip(Context context, float pxValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
+    }*/
+
+    public static int formatPix(Context context, float pixValue) {
+        int width = 1920;
+
+        return (int) Math.round(Helper.Width * 1.0 / width * pixValue);
     }
 
     public static WebResourceResponse checkLoaclFile(Context context, String url) {

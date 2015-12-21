@@ -1,6 +1,7 @@
 package com.nowui.crrc.view;
 
 import android.content.Context;
+import android.content.res.AssetFileDescriptor;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.media.AudioManager;
@@ -15,26 +16,30 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
 import com.nowui.crrc.R;
+import com.nowui.crrc.utility.Helper;
 
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class VideoView extends RelativeLayout {
 
     private Context myContext;
+    private RelativeLayout contentRelativeLayout;
     private SurfaceView surfaceView;
     private SurfaceHolder holder;
     private MediaPlayer mediaPlayer;
-    private View maskView;
+    private ImageButton skipImageButton;
     private Handler handler = new Handler();
 
-    private OnClickSkipButtonListener onClickSkipButtonListener;
+    private OnOnCompletionListener onOnCompletionListener;
 
-    public interface OnClickSkipButtonListener {
-        public void OnClick();
+    public interface OnOnCompletionListener {
+        public void OnTrigger();
     }
 
-    public void setOnClickSkipButtonListener(OnClickSkipButtonListener listener) {
-        onClickSkipButtonListener = listener;
+    public void setOnOnCompletionListener(OnOnCompletionListener listener) {
+        onOnCompletionListener = listener;
     }
 
     public VideoView(Context context) {
@@ -68,12 +73,20 @@ public class VideoView extends RelativeLayout {
     private void initView(Context context) {
         View.inflate(context, R.layout.view_video, this);
 
+        contentRelativeLayout = new RelativeLayout(myContext);
+
+        RelativeLayout.LayoutParams contentRelativeLayoutParams = new RelativeLayout.LayoutParams(Helper.Width, Helper.Height);
+        contentRelativeLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        contentRelativeLayoutParams.addRule(RelativeLayout.CENTER_VERTICAL);
+        contentRelativeLayoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
+        this.addView(contentRelativeLayout, contentRelativeLayoutParams);
+
         surfaceView = new SurfaceView(context);
 
         RelativeLayout.LayoutParams surfaceViewLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
         surfaceViewLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
         surfaceViewLayoutParams.addRule(RelativeLayout.CENTER_VERTICAL);
-        this.addView(surfaceView, surfaceViewLayoutParams);
+        contentRelativeLayout.addView(surfaceView, surfaceViewLayoutParams);
 
         holder = surfaceView.getHolder();
         holder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
@@ -82,6 +95,8 @@ public class VideoView extends RelativeLayout {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
                 mediaPlayer = new MediaPlayer();
+                mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                mediaPlayer.setDisplay(holder);
                 mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                     @Override
                     public void onPrepared(MediaPlayer mp) {
@@ -91,17 +106,21 @@ public class VideoView extends RelativeLayout {
                 mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                     @Override
                     public void onCompletion(MediaPlayer mp) {
-                        if (onClickSkipButtonListener != null) {
-                            onClickSkipButtonListener.OnClick();
+                        if (onOnCompletionListener != null) {
+                            onOnCompletionListener.OnTrigger();
                         }
                     }
                 });
-                mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                mediaPlayer.setDisplay(holder);
 
                 try {
-                    mediaPlayer.setDataSource(Environment.getExternalStorageDirectory().getPath() + "/crrc/video.mp4");
+                    //AssetFileDescriptor fd = fd = myContext.getAssets().openFd("video_" + Helper.Version + ".mp4");
+                    //mediaPlayer.setDataSource(fd.getFileDescriptor(), fd.getStartOffset(), fd.getLength());
+                    mediaPlayer.setDataSource(Environment.getExternalStorageDirectory().getPath() + "/crrc/video_" + Helper.Version + ".mp4");
                     mediaPlayer.prepare();
+                    mediaPlayer.setVolume(1.0F, 1.0F);
+                    mediaPlayer.start();
+
+                    handler.postDelayed(skipRunnable, 13700);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -114,59 +133,36 @@ public class VideoView extends RelativeLayout {
 
             @Override
             public void surfaceDestroyed(SurfaceHolder holder) {
-
+                if (mediaPlayer.isPlaying()) {
+                    mediaPlayer.stop();
+                }
+                mediaPlayer.release();
             }
         });
 
-        ImageButton skipImageButton = new ImageButton(context);
+        skipImageButton = new ImageButton(context);
         skipImageButton.setImageDrawable(getResources().getDrawable(R.mipmap.skip_button));
         skipImageButton.getBackground().setAlpha(0);
         skipImageButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (onClickSkipButtonListener != null) {
-                    onClickSkipButtonListener.OnClick();
-                }
+                skipImageButton.setVisibility(INVISIBLE);
+
+                mediaPlayer.seekTo(13700);
             }
         });
 
         RelativeLayout.LayoutParams skipImageButtonLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         skipImageButtonLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        skipImageButtonLayoutParams.bottomMargin = 10;
+        skipImageButtonLayoutParams.bottomMargin = Helper.formatPix(myContext, 10);
         skipImageButtonLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        skipImageButtonLayoutParams.rightMargin = 10;
-        this.addView(skipImageButton, skipImageButtonLayoutParams);
-
-        maskView = new View(context);
-        maskView.setBackgroundColor(getResources().getColor(R.color.mask_color));
-
-        RelativeLayout.LayoutParams maskViewLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        this.addView(maskView, maskViewLayoutParams);
+        skipImageButtonLayoutParams.rightMargin = Helper.formatPix(myContext, 10);
+        contentRelativeLayout.addView(skipImageButton, skipImageButtonLayoutParams);
     }
 
-    public void play() {
-        mediaPlayer.start();
-
-        handler.postDelayed(task, 100);
-    }
-
-    public void stop() {
-        mediaPlayer.stop();
-        mediaPlayer.reset();
-
-        maskView.setVisibility(VISIBLE);
-
-        try {
-            mediaPlayer.setDataSource(Environment.getExternalStorageDirectory().getPath() + "/crrc/video.mp4");
-            mediaPlayer.prepareAsync();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private Runnable task = new Runnable() {
+    private Runnable skipRunnable = new Runnable() {
         public void run() {
-            maskView.setVisibility(INVISIBLE);
+            skipImageButton.setVisibility(INVISIBLE);
         }
     };
 

@@ -81,13 +81,22 @@ public class MenuView extends RelativeLayout {
         bottomImageView.setImageDrawable(getResources().getDrawable(R.mipmap.menu_bottom));
 
         RelativeLayout.LayoutParams bottomImageViewLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        bottomImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        bottomImageViewLayoutParams.bottomMargin = Helper.dip2px(myContext, 0);
-        bottomImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-        bottomImageViewLayoutParams.leftMargin = Helper.dip2px(myContext, 4);
-        if(typeString.equals("right")) {
+        if(typeString.equals("bottom")) {
+            bottomImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+            bottomImageViewLayoutParams.bottomMargin = Helper.formatPix(myContext, 55);
+        } else {
+            bottomImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+            bottomImageViewLayoutParams.topMargin = Helper.formatPix(myContext, 55);
+        }
+        if(typeString.equals("left")) {
+            bottomImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+            bottomImageViewLayoutParams.leftMargin = Helper.formatPix(myContext, -5);
+        } else if(typeString.equals("right")) {
             bottomImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-            bottomImageViewLayoutParams.rightMargin = Helper.dip2px(myContext, 4);
+            bottomImageViewLayoutParams.rightMargin = Helper.formatPix(myContext, -5);
+        } else if(typeString.equals("bottom")) {
+            bottomImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+            bottomImageViewLayoutParams.leftMargin = Helper.formatPix(myContext, -3);
         }
         this.addView(bottomImageView, bottomImageViewLayoutParams);
 
@@ -110,48 +119,78 @@ public class MenuView extends RelativeLayout {
     }
 
     private void initTitle() {
-        ImageView titleImageView = new ImageView(myContext);
-        titleImageView.setImageDrawable(getResources().getDrawable(getResources().getIdentifier(titleString, "mipmap", "com.nowui.crrc")));
+        ImageButton titleImageButton = new ImageButton(myContext);
+        titleImageButton.setImageDrawable(getResources().getDrawable(getResources().getIdentifier(titleString, "mipmap", "com.nowui.crrc")));
+        titleImageButton.getBackground().setAlpha(0);
+        titleImageButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onClickMenuViewListener != null) {
+                    onClickMenuViewListener.OnClick((int) getTag());
+                }
+            }
+        });
 
-        RelativeLayout.LayoutParams titleImageViewLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        titleImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        titleImageViewLayoutParams.bottomMargin = Helper.dip2px(myContext, 18);
-        titleImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-        titleImageViewLayoutParams.leftMargin = Helper.dip2px(myContext, 14);
-        if(typeString.equals("right")) {
-            titleImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-            titleImageViewLayoutParams.rightMargin = Helper.dip2px(myContext, 14);
+        RelativeLayout.LayoutParams titleImageButtonLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        if(typeString.equals("bottom")) {
+            titleImageButtonLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+            titleImageButtonLayoutParams.topMargin = Helper.formatPix(myContext, 25);
+        } else {
+            titleImageButtonLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+            titleImageButtonLayoutParams.bottomMargin = Helper.formatPix(myContext, 20);
         }
-        this.addView(titleImageView, titleImageViewLayoutParams);
+        if(typeString.equals("left")) {
+            titleImageButtonLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+            titleImageButtonLayoutParams.leftMargin = Helper.formatPix(myContext, 10);
+        } else if(typeString.equals("right")) {
+            titleImageButtonLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            titleImageButtonLayoutParams.rightMargin = Helper.formatPix(myContext, 10);
+        } else if(typeString.equals("bottom")) {
+            titleImageButtonLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+            titleImageButtonLayoutParams.leftMargin = Helper.formatPix(myContext, 10);
+        }
+        this.addView(titleImageButton, titleImageButtonLayoutParams);
     }
 
     private void initLocation() {
         ImageButton locationImageButton = new ImageButton(myContext);
-        locationImageButton.setImageDrawable(getResources().getDrawable(R.mipmap.menu_location));
+        locationImageButton.setImageDrawable(getResources().getDrawable(R.mipmap.menu_location_top));
+        if(typeString.equals("bottom")) {
+            locationImageButton.setImageDrawable(getResources().getDrawable(R.mipmap.menu_location_bottom));
+        }
         locationImageButton.getBackground().setAlpha(0);
         locationImageButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(onClickMenuViewListener != null) {
+                if (onClickMenuViewListener != null) {
                     onClickMenuViewListener.OnClick((int) getTag());
                 }
             }
         });
 
         RelativeLayout.LayoutParams locationImageViewLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        locationImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        locationImageViewLayoutParams.bottomMargin = Helper.dip2px(myContext, 5);
-        locationImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-        locationImageViewLayoutParams.leftMargin = Helper.dip2px(myContext, 0);
-        if(typeString.equals("right")) {
+        if(typeString.equals("bottom")) {
+            locationImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+            locationImageViewLayoutParams.topMargin = Helper.formatPix(myContext, 20);
+        } else {
+            locationImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+            locationImageViewLayoutParams.bottomMargin = Helper.formatPix(myContext, 25);
+        }
+        if(typeString.equals("left")) {
+            locationImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+            locationImageViewLayoutParams.leftMargin = Helper.formatPix(myContext, -17);
+        } else if(typeString.equals("right")) {
             locationImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-            locationImageViewLayoutParams.rightMargin = Helper.dip2px(myContext, 0);
+            locationImageViewLayoutParams.rightMargin = Helper.formatPix(myContext, -17);
+        } else if(typeString.equals("bottom")) {
+            locationImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+            locationImageViewLayoutParams.leftMargin = Helper.formatPix(myContext, -17);
         }
         this.addView(locationImageButton, locationImageViewLayoutParams);
 
         AnimationSet set = new AnimationSet(true);
 
-        TranslateAnimation translateAnimation = new TranslateAnimation(0, 0, 0, 10);
+        TranslateAnimation translateAnimation = new TranslateAnimation(0, 0, 0, Helper.formatPix(myContext, 10));
         translateAnimation.setDuration(500);
         translateAnimation.setRepeatCount(Animation.INFINITE);
         translateAnimation.setRepeatMode(Animation.REVERSE);

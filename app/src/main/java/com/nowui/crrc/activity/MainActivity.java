@@ -1,9 +1,11 @@
 package com.nowui.crrc.activity;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -11,12 +13,14 @@ import android.widget.RelativeLayout;
 
 import com.nowui.crrc.R;
 import com.nowui.crrc.utility.Helper;
+import com.nowui.crrc.view.LoadView;
 import com.nowui.crrc.view.MainView;
 import com.nowui.crrc.view.StartView;
 import com.nowui.crrc.view.VideoView;
 
 public class MainActivity extends Activity {
 
+    private static final int SHOW_ANOTHER_ACTIVITY = 99;
     private RelativeLayout mainRelativeLayout;
     StartView startView;
     VideoView videoView;
@@ -28,18 +32,44 @@ public class MainActivity extends Activity {
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         setContentView(R.layout.activity_main);
 
-        System.out.println(Helper.getScreenWidth(this));
-        System.out.println(Helper.getScreenHeight(this));
+        int width = Helper.getScreenWidth(this);
+        int height = Helper.getScreenHeight(this);
+
+        System.out.println("width:" + width);
+        System.out.println("height:" + height);
+
+        System.out.println(this.getResources().getDisplayMetrics().density);
+
+        if (this.getResources().getDisplayMetrics().density == 2) {
+            Helper.Width = 1280;
+            Helper.Height = 720;
+
+            if(width < Helper.Width) {
+                Helper.Height = (int) Math.round(width * 1.0 / Helper.Width * Helper.Height);
+                Helper.Width = width;
+            }
+        } else if (this.getResources().getDisplayMetrics().density == 3) {
+            Helper.Width = 1920;
+            Helper.Height = 1080;
+        } else if (this.getResources().getDisplayMetrics().density == 4) {
+            Helper.Width = 2560;
+            Helper.Height = 1440;
+
+            Helper.Height = (int) Math.round(width * 1.0 / Helper.Width * Helper.Height);
+            Helper.Width = width;
+        }
+
+        System.out.println("Helper.Width:" + Helper.Width);
+        System.out.println("Helper.Height:" + Helper.Height);
 
         mainRelativeLayout = (RelativeLayout) findViewById(R.id.mainRelativeLayout);
 
         initMainView();
         mainView.setVisibility(View.VISIBLE);
-
-        //initVideoView();
 
         //initStartView();
     }
@@ -58,7 +88,7 @@ public class MainActivity extends Activity {
         startView.setOnClickStartButtonListener(new StartView.OnClickStartButtonListener() {
             @Override
             public void OnClick() {
-                showVideoView();
+                initVideoView();
             }
         });
 
@@ -68,16 +98,19 @@ public class MainActivity extends Activity {
 
     private void initVideoView() {
         videoView = new VideoView(this);
-        videoView.setVisibility(View.INVISIBLE);
-        videoView.setOnClickSkipButtonListener(new VideoView.OnClickSkipButtonListener() {
+        videoView.setOnOnCompletionListener(new VideoView.OnOnCompletionListener() {
             @Override
-            public void OnClick() {
+            public void OnTrigger() {
                 showMainView();
+
+                videoView.setVisibility(View.GONE);
+
+                handler.postDelayed(closeVideoViewRunnable, 300);
             }
         });
 
         RelativeLayout.LayoutParams videoViewPagerLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-        mainRelativeLayout.addView(videoView, videoViewPagerLayoutParams);
+        mainRelativeLayout.addView(videoView, 2, videoViewPagerLayoutParams);
     }
 
     private void initMainView() {
@@ -100,26 +133,66 @@ public class MainActivity extends Activity {
         mainRelativeLayout.addView(mainView, mainViewPagerLayoutParams);
     }
 
-    private void showStartView() {
-        startView.setVisibility(View.VISIBLE);
-        videoView.setVisibility(View.INVISIBLE);
-        mainView.setVisibility(View.INVISIBLE);
+    private void initLoadView() {
+        System.out.println("init load view");
+
+        final LoadView loadView = new LoadView(this);
+        loadView.setVisibility(View.VISIBLE);
+        loadView.setOnOnCompletionListener(new LoadView.OnOnCompletionListener() {
+            @Override
+            public void OnTrigger() {
+                mainRelativeLayout.removeView(loadView);
+            }
+        });
+
+        RelativeLayout.LayoutParams loadViewPagerLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+        mainRelativeLayout.addView(loadView, loadViewPagerLayoutParams);
     }
 
-    private void showVideoView() {
-        startView.setVisibility(View.INVISIBLE);
-        videoView.setVisibility(View.VISIBLE);
+    private void showStartView() {
+        startView.setVisibility(View.VISIBLE);
         mainView.setVisibility(View.INVISIBLE);
-
-        videoView.play();
     }
 
     private void showMainView() {
         startView.setVisibility(View.INVISIBLE);
-        videoView.setVisibility(View.INVISIBLE);
         mainView.setVisibility(View.VISIBLE);
+    }
 
-        videoView.stop();
+    private Runnable closeVideoViewRunnable = new Runnable() {
+        public void run() {
+            mainRelativeLayout.removeView(videoView);
+        }
+    };
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch(msg.what) {
+                case SHOW_ANOTHER_ACTIVITY:
+                    initLoadView();
+
+                    break;
+            }
+            super.handleMessage(msg);
+        }
+    };
+
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        switch(ev.getAction()){
+            case MotionEvent.ACTION_DOWN: {
+                handler.removeMessages(SHOW_ANOTHER_ACTIVITY);
+                break;
+            }
+            case MotionEvent.ACTION_UP: {
+                if (mainView.getVisibility() == View.VISIBLE) {
+                    handler.sendEmptyMessageDelayed(SHOW_ANOTHER_ACTIVITY, 1000 * 60);
+                }
+                break;
+            }
+        }
+
+        return super.dispatchTouchEvent(ev);
     }
 
 }

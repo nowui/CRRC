@@ -2,6 +2,7 @@ package com.nowui.crrc.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageButton;
@@ -17,6 +18,7 @@ import com.nowui.crrc.utility.Helper;
 public class MainView extends RelativeLayout {
 
     private Context myContext;
+    private RelativeLayout contentRelativeLayout;
     private ImageButton homeImageButton;
     private ImageButton quitImageButton;
 
@@ -71,6 +73,15 @@ public class MainView extends RelativeLayout {
     private void initView(Context context) {
         View.inflate(context, R.layout.view_main, this);
 
+        contentRelativeLayout = new RelativeLayout(myContext);
+        //contentRelativeLayout.setBackgroundColor(Color.parseColor("#ff0000"));
+
+        RelativeLayout.LayoutParams contentRelativeLayoutParams = new RelativeLayout.LayoutParams(Helper.Width, Helper.Height);
+        contentRelativeLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        contentRelativeLayoutParams.addRule(RelativeLayout.CENTER_VERTICAL);
+        contentRelativeLayoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
+        this.addView(contentRelativeLayout, contentRelativeLayoutParams);
+
         initBackground();
 
         initContent();
@@ -85,21 +96,14 @@ public class MainView extends RelativeLayout {
     private void initBackground() {
         ImageView backgroundImageView = new ImageView(myContext);
         backgroundImageView.setImageDrawable(getResources().getDrawable(R.mipmap.main_background));
-        backgroundImageView.setScaleType(ImageView.ScaleType.CENTER);
 
-        RelativeLayout.LayoutParams backgroundImageViewLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+        RelativeLayout.LayoutParams backgroundImageViewLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         backgroundImageViewLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
         backgroundImageViewLayoutParams.addRule(RelativeLayout.CENTER_VERTICAL);
-        this.addView(backgroundImageView, backgroundImageViewLayoutParams);
+        contentRelativeLayout.addView(backgroundImageView, backgroundImageViewLayoutParams);
     }
 
     private void initContent() {
-        RelativeLayout contentRelativeLayout = new RelativeLayout(myContext);
-
-        RelativeLayout.LayoutParams contentRelativeLayoutParams = new RelativeLayout.LayoutParams(Helper.dip2px(myContext, Helper.Width), Helper.dip2px(myContext, Helper.Height));
-        contentRelativeLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
-        contentRelativeLayoutParams.addRule(RelativeLayout.CENTER_VERTICAL);
-        this.addView(contentRelativeLayout, contentRelativeLayoutParams);
 
         MenuView.OnClickMenuViewListener onClickMenuViewListener = new MenuView.OnClickMenuViewListener() {
             @Override
@@ -125,7 +129,7 @@ public class MainView extends RelativeLayout {
             }
         };
 
-        String jsonString = "[{\"type\": \"left\", \"tag\": 0, \"title\": \"menu_title_0\", \"top\": 127, \"left\": 217 }, {\"type\": \"left\", \"tag\": 1, \"title\": \"menu_title_1\", \"top\": 83, \"left\": 303 }]";
+        String jsonString = "[{\"type\": \"left\", \"tag\": 0, \"title\": \"menu_title_" + Helper.Language + "_" + Helper.Version + "_0\", \"top\": 565, \"left\": 670 }, {\"type\": \"left\", \"tag\": 1, \"title\": \"menu_title_" + Helper.Language + "_" + Helper.Version + "_1\", \"top\": 445, \"left\": 925 }]";
 
         JSONArray jsonArray = JSON.parseArray(jsonString);
 
@@ -136,11 +140,11 @@ public class MainView extends RelativeLayout {
             menuView.setTag(jsonObject.get("tag"));
             menuView.setOnClickMenuViewListener(onClickMenuViewListener);
 
-            RelativeLayout.LayoutParams menuViewLayoutParams = new RelativeLayout.LayoutParams(Helper.dip2px(myContext, 100), Helper.dip2px(myContext, 100));
+            RelativeLayout.LayoutParams menuViewLayoutParams = new RelativeLayout.LayoutParams(Helper.formatPix(myContext, 300), Helper.formatPix(myContext, 100));
             menuViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-            menuViewLayoutParams.topMargin = Helper.dip2px(myContext, Float.parseFloat(jsonObject.get("top").toString()));
+            menuViewLayoutParams.topMargin = Helper.formatPix(myContext, Float.parseFloat(jsonObject.get("top").toString()));
             menuViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-            menuViewLayoutParams.leftMargin = Helper.dip2px(myContext, Float.parseFloat(jsonObject.get("left").toString()));
+            menuViewLayoutParams.leftMargin = Helper.formatPix(myContext, Float.parseFloat(jsonObject.get("left").toString()));
             contentRelativeLayout.addView(menuView, menuViewLayoutParams);
         }
     }
@@ -151,15 +155,15 @@ public class MainView extends RelativeLayout {
 
         RelativeLayout.LayoutParams logoImageViewLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         logoImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-        logoImageViewLayoutParams.topMargin = Helper.dip2px(myContext, 10);
+        logoImageViewLayoutParams.topMargin = Helper.formatPix(myContext, 30);
         logoImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-        logoImageViewLayoutParams.leftMargin = Helper.dip2px(myContext, 10);
-        this.addView(logoImageView, logoImageViewLayoutParams);
+        logoImageViewLayoutParams.leftMargin = Helper.formatPix(myContext, 30);
+        contentRelativeLayout.addView(logoImageView, logoImageViewLayoutParams);
     }
 
     private void initHomeButton() {
         homeImageButton = new ImageButton(myContext);
-        homeImageButton.setImageDrawable(getResources().getDrawable(R.mipmap.home_button));
+        homeImageButton.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("home_button_" + Helper.Language, "mipmap", "com.nowui.crrc")));
         homeImageButton.getBackground().setAlpha(0);
         homeImageButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -172,20 +176,20 @@ public class MainView extends RelativeLayout {
 
         RelativeLayout.LayoutParams homeImageButtonLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         homeImageButtonLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        homeImageButtonLayoutParams.bottomMargin = Helper.dip2px(myContext, 0);
+        homeImageButtonLayoutParams.bottomMargin = Helper.formatPix(myContext, 0);
         homeImageButtonLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        homeImageButtonLayoutParams.rightMargin = Helper.dip2px(myContext, 35);
-        this.addView(homeImageButton, homeImageButtonLayoutParams);
+        homeImageButtonLayoutParams.rightMargin = Helper.formatPix(myContext, 100);
+        contentRelativeLayout.addView(homeImageButton, homeImageButtonLayoutParams);
     }
 
     private void initQuitButton() {
         quitImageButton = new ImageButton(myContext);
-        quitImageButton.setImageDrawable(getResources().getDrawable(R.mipmap.quit_button));
+        quitImageButton.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("quit_button_" + Helper.Language, "mipmap", "com.nowui.crrc")));
         quitImageButton.getBackground().setAlpha(0);
         quitImageButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(onClickQuitButtonListener != null) {
+                if (onClickQuitButtonListener != null) {
                     onClickQuitButtonListener.OnClick();
                 }
             }
@@ -193,10 +197,10 @@ public class MainView extends RelativeLayout {
 
         RelativeLayout.LayoutParams quitImageButtonLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         quitImageButtonLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        quitImageButtonLayoutParams.bottomMargin = Helper.dip2px(myContext, 0);
+        quitImageButtonLayoutParams.bottomMargin = Helper.formatPix(myContext, 0);
         quitImageButtonLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        quitImageButtonLayoutParams.rightMargin = Helper.dip2px(myContext, 0);
-        this.addView(quitImageButton, quitImageButtonLayoutParams);
+        quitImageButtonLayoutParams.rightMargin = Helper.formatPix(myContext, 0);
+        contentRelativeLayout.addView(quitImageButton, quitImageButtonLayoutParams);
     }
 
 }

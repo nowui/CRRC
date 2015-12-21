@@ -9,10 +9,12 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.nowui.crrc.R;
+import com.nowui.crrc.utility.Helper;
 
 public class StartView extends RelativeLayout {
 
     private Context myContext;
+    private RelativeLayout contentRelativeLayout;
 
     private OnClickStartButtonListener onClickStartButtonListener;
 
@@ -55,14 +57,22 @@ public class StartView extends RelativeLayout {
     private void initView(Context context) {
         View.inflate(context, R.layout.view_start, this);
 
+        contentRelativeLayout = new RelativeLayout(myContext);
+
+        RelativeLayout.LayoutParams contentRelativeLayoutParams = new RelativeLayout.LayoutParams(Helper.Width, Helper.Height);
+        contentRelativeLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        contentRelativeLayoutParams.addRule(RelativeLayout.CENTER_VERTICAL);
+        contentRelativeLayoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
+        this.addView(contentRelativeLayout, contentRelativeLayoutParams);
+
         ImageView backgroundImageView = new ImageView(context);
         backgroundImageView.setImageDrawable(getResources().getDrawable(R.mipmap.start_background));
-        backgroundImageView.setScaleType(ImageView.ScaleType.CENTER);
+        backgroundImageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 
-        RelativeLayout.LayoutParams backgroundImageViewLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+        RelativeLayout.LayoutParams backgroundImageViewLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         backgroundImageViewLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
         backgroundImageViewLayoutParams.addRule(RelativeLayout.CENTER_VERTICAL);
-        this.addView(backgroundImageView, backgroundImageViewLayoutParams);
+        contentRelativeLayout.addView(backgroundImageView, backgroundImageViewLayoutParams);
 
         ImageButton startImageButton = new ImageButton(context);
         startImageButton.setImageDrawable(getResources().getDrawable(R.mipmap.start_button));
@@ -78,9 +88,9 @@ public class StartView extends RelativeLayout {
 
         RelativeLayout.LayoutParams startImageButtonLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         startImageButtonLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
-        startImageButtonLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        startImageButtonLayoutParams.bottomMargin = 300;
-        this.addView(startImageButton, startImageButtonLayoutParams);
+        startImageButtonLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+        startImageButtonLayoutParams.topMargin = Helper.formatPix(myContext, 210);
+        contentRelativeLayout.addView(startImageButton, startImageButtonLayoutParams);
     }
 
 }
