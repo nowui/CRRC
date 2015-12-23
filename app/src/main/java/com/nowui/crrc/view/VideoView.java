@@ -117,6 +117,12 @@ public class VideoView extends RelativeLayout {
                 try {
                     //AssetFileDescriptor fd = fd = myContext.getAssets().openFd("video_" + Helper.Version + ".mp4");
                     //mediaPlayer.setDataSource(fd.getFileDescriptor(), fd.getStartOffset(), fd.getLength());
+                    if (Helper.Version == "all") {
+
+                    } else {
+
+                    }
+
                     mediaPlayer.setDataSource(Environment.getExternalStorageDirectory().getPath() + "/crrc/video_" + Helper.Version + ".mp4");
                     mediaPlayer.prepare();
                     mediaPlayer.setVolume(1.0F, 1.0F);

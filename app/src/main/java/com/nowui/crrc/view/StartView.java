@@ -91,7 +91,7 @@ public class StartView extends RelativeLayout {
         RelativeLayout.LayoutParams startImageButtonLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         startImageButtonLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
         startImageButtonLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-        startImageButtonLayoutParams.topMargin = Helper.formatPix(myContext, 210);
+        startImageButtonLayoutParams.topMargin = Helper.formatPix(myContext, 640);
         contentRelativeLayout.addView(startImageButton, startImageButtonLayoutParams);
     }
 

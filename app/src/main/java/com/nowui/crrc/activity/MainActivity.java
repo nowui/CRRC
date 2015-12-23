@@ -39,6 +39,8 @@ public class MainActivity extends Activity {
         int width = Helper.getScreenWidth(this);
         int height = Helper.getScreenHeight(this);
 
+        System.out.println("version:" + android.os.Build.VERSION.SDK_INT);
+
         System.out.println("width:" + width);
         System.out.println("height:" + height);
 
@@ -120,6 +122,12 @@ public class MainActivity extends Activity {
             @Override
             public void OnClick() {
                 showStartView();
+            }
+        });
+        mainView.setOnClickVideoButtonListener(new MainView.OnClickVideoButtonListener() {
+            @Override
+            public void OnClick() {
+                initLoadView();
             }
         });
         mainView.setOnClickQuitButtonListener(new MainView.OnClickQuitButtonListener() {

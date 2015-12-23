@@ -26,8 +26,8 @@ public class Helper {
 
     public static final String Language = "en";
     //public static final String Language = "zh";
-    public static final String Version = "cut";
-    //public static final String Version = "all";
+    //public static final String Version = "cut";
+    public static final String Version = "all";
 
     //Key
     public static final String KeyId = "id";
