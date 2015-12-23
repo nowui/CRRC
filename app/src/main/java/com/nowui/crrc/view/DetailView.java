@@ -2,6 +2,8 @@ package com.nowui.crrc.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageButton;
@@ -12,15 +14,18 @@ import android.widget.ScrollView;
 import com.nowui.crrc.R;
 import com.nowui.crrc.utility.Helper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DetailView extends RelativeLayout {
 
     private Context myContext;
     private RelativeLayout contentRelativeLayout;
+    private RelativeLayout pointRelativeLayout;
+    private List<View> viewList = new ArrayList<View>();
     private int tag;
+    private int position;
     private int parent;
-    private int selectInt = -1;
-    private RelativeLayout tabContentRelativeLayout;
-    private ScrollView introductionScrollView;
 
     private OnClickDetailViewCloseButtonListener onClickDetailViewCloseButtonListener;
 
@@ -36,9 +41,10 @@ public class DetailView extends RelativeLayout {
         super(context);
 
         myContext = context;
+        this.tag = position;
+        this.position = position;
         this.parent = parent;
 
-        tag = position;
 
         initView(context);
     }
@@ -76,129 +82,114 @@ public class DetailView extends RelativeLayout {
         contentRelativeLayoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
         this.addView(contentRelativeLayout, contentRelativeLayoutParams);
 
-        initBackground();
+        int total = 1;
 
-        initContent();
-    }
+        if (Helper.Version == "all" && tag == 1 && parent == 2) {
+            total = 3;
+        } else if (Helper.Version == "all" && tag == 2 && parent == 2) {
+            total = 2;
+        }
 
-    private void initBackground() {
-        ImageView backgroundImageView = new ImageView(myContext);
-        backgroundImageView.setImageDrawable(getResources().getDrawable(R.mipmap.detail_background));
-
-        RelativeLayout.LayoutParams backgroundImageViewLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        backgroundImageViewLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
-        backgroundImageViewLayoutParams.addRule(RelativeLayout.CENTER_VERTICAL);
-        contentRelativeLayout.addView(backgroundImageView, backgroundImageViewLayoutParams);
-    }
-
-    private void initContent() {
-        ImageView titleImageView = new ImageView(myContext);
-        titleImageView.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("detail_title_" + Helper.Language + "_" + Helper.Version + "_" + parent + "_" + tag, "mipmap", "com.nowui.crrc")));
-
-        RelativeLayout.LayoutParams titleImageViewLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        titleImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-        titleImageViewLayoutParams.topMargin = Helper.formatPix(myContext, 255);
-        titleImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-        titleImageViewLayoutParams.leftMargin = Helper.formatPix(myContext, 160);
-        contentRelativeLayout.addView(titleImageView, titleImageViewLayoutParams);
-
-        RelativeLayout pictureContentRelativeLayout = new RelativeLayout(myContext);
-
-        RelativeLayout.LayoutParams pictureContentRelativeLayoutParams = new RelativeLayout.LayoutParams(Helper.formatPix(myContext, 750), Helper.formatPix(myContext, 535));
-        pictureContentRelativeLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-        pictureContentRelativeLayoutParams.topMargin = Helper.formatPix(myContext, 267);
-        pictureContentRelativeLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-        pictureContentRelativeLayoutParams.leftMargin = Helper.formatPix(myContext, 958);
-        contentRelativeLayout.addView(pictureContentRelativeLayout, pictureContentRelativeLayoutParams);
-
-        ImageView pictureImageView = new ImageView(myContext);
-        pictureImageView.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("detail_picture_" + Helper.Language + "_" + Helper.Version + "_" + parent + "_" + tag, "mipmap", "com.nowui.crrc")));
-
-        RelativeLayout.LayoutParams pictureImageViewLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        pictureImageViewLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
-        pictureImageViewLayoutParams.addRule(RelativeLayout.CENTER_VERTICAL);
-        pictureContentRelativeLayout.addView(pictureImageView, pictureImageViewLayoutParams);
-
-        tabContentRelativeLayout = new RelativeLayout(myContext);
-
-        RelativeLayout.LayoutParams tabContentRelativeLayoutParams = new RelativeLayout.LayoutParams(Helper.formatPix(myContext, 700), Helper.formatPix(myContext, 100));
-        tabContentRelativeLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-        tabContentRelativeLayoutParams.topMargin = Helper.formatPix(myContext, 800);
-        tabContentRelativeLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-        tabContentRelativeLayoutParams.leftMargin = Helper.formatPix(myContext, 200);
-        contentRelativeLayout.addView(tabContentRelativeLayout, tabContentRelativeLayoutParams);
-
-        for(int i = 0; i < 3; i++) {
-            ImageButton tabImageButton = new ImageButton(myContext);
-            tabImageButton.setTag(i);
-            tabImageButton.getBackground().setAlpha(0);
-            tabImageButton.setOnClickListener(new OnClickListener() {
+        for(int i = 0; i < total; i++) {
+            AlertView alertView = new AlertView(myContext, this.tag, parent, i);
+            alertView.setOnClickAlertViewCloseButtonListener(new AlertView.OnClickAlertViewCloseButtonListener() {
                 @Override
-                public void onClick(View v) {
-                    checkTabImageButton((int) v.getTag());
+                public void OnClick() {
+                    if (onClickDetailViewCloseButtonListener != null) {
+                        onClickDetailViewCloseButtonListener.OnClick();
+                    }
                 }
             });
 
-            RelativeLayout.LayoutParams tabImageButtonLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-            tabImageButtonLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-            tabImageButtonLayoutParams.leftMargin = Helper.formatPix(myContext, 120 * i);
-            tabContentRelativeLayout.addView(tabImageButton, tabImageButtonLayoutParams);
+            viewList.add(alertView);
         }
 
-        introductionScrollView = new ScrollView(myContext);
-
-        RelativeLayout.LayoutParams introductionScrollViewLayoutParams = new RelativeLayout.LayoutParams(Helper.formatPix(myContext, 700), Helper.formatPix(myContext, 370));
-        introductionScrollViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-        introductionScrollViewLayoutParams.topMargin = Helper.formatPix(myContext, 390);
-        introductionScrollViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-        introductionScrollViewLayoutParams.leftMargin = Helper.formatPix(myContext, 183);
-        contentRelativeLayout.addView(introductionScrollView, introductionScrollViewLayoutParams);
-
-        ImageButton closeImageButton = new ImageButton(myContext);
-        closeImageButton.setImageDrawable(getResources().getDrawable(R.mipmap.close_button));
-        closeImageButton.getBackground().setAlpha(0);
-        closeImageButton.setOnClickListener(new OnClickListener() {
+        ViewPager viewPager = new ViewPager(myContext);
+        viewPager.setOffscreenPageLimit(total - 1);
+        viewPager.setAdapter(new BasePagerAdapter(viewList));
+        viewPager.setCurrentItem(0, false);
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onClick(View v) {
-                if (onClickDetailViewCloseButtonListener != null) {
-                    onClickDetailViewCloseButtonListener.OnClick();
-                }
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                checkPoint(position);
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
             }
         });
 
-        RelativeLayout.LayoutParams closeImageButtonLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        closeImageButtonLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
-        closeImageButtonLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        closeImageButtonLayoutParams.bottomMargin = Helper.formatPix(myContext, 42);
-        contentRelativeLayout.addView(closeImageButton, closeImageButtonLayoutParams);
+        RelativeLayout.LayoutParams viewPagerLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
 
-        checkTabImageButton(0);
+        contentRelativeLayout.addView(viewPager, viewPagerLayoutParams);
+
+        pointRelativeLayout = new RelativeLayout(myContext);
+
+        if (total > 1) {
+            RelativeLayout.LayoutParams pointRelativeLayoutParams = new RelativeLayout.LayoutParams(Helper.formatPix(myContext, 50 * total), Helper.formatPix(myContext, 20));
+            pointRelativeLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+            pointRelativeLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+            pointRelativeLayoutParams.topMargin = Helper.formatPix(myContext, 847);
+            contentRelativeLayout.addView(pointRelativeLayout, pointRelativeLayoutParams);
+
+            for (int i = 0; i < total; i++) {
+                ImageView pointImageView = new ImageView(context);
+                pointImageView.setTag(i);
+
+                RelativeLayout.LayoutParams pointImageViewParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                pointImageViewParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+                pointImageViewParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+                pointImageViewParams.leftMargin = Helper.formatPix(myContext, 19 + i * 50);
+                pointRelativeLayout.addView(pointImageView, pointImageViewParams);
+            }
+
+            checkPoint(0);
+        }
     }
 
-    private void checkTabImageButton(int position) {
-        if(selectInt == position) {
-            return;
-        }
-
-        selectInt = position;
-
-        for(int i = 0; i < tabContentRelativeLayout.getChildCount(); i++) {
-            View view = tabContentRelativeLayout.getChildAt(i);
-            if(view instanceof ImageButton) {
-                ((ImageButton)view).setImageDrawable(getResources().getDrawable(getResources().getIdentifier("detail_tab_" + Helper.Language + "_" + i + (selectInt == (int) view.getTag() ? "_active" : ""), "mipmap", "com.nowui.crrc")));
+    public void checkPoint(int position) {
+        for(int i = 0; i < pointRelativeLayout.getChildCount(); i++) {
+            View view = pointRelativeLayout.getChildAt(i);
+            if(view instanceof ImageView) {
+                ((ImageView)view).setImageDrawable(getResources().getDrawable(getResources().getIdentifier("point" + (position == (int) view.getTag() ? "_active" : ""), "mipmap", Helper.defPackage)));
             }
         }
-
-        checkIntroductionScrollView(position);
     }
 
-    private void checkIntroductionScrollView(int position) {
-        introductionScrollView.removeAllViews();
+    public class BasePagerAdapter extends PagerAdapter {
 
-        ImageView introductionImageView = new ImageView(myContext);
-        introductionImageView.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("detail_introduction_" + Helper.Language + "_" + Helper.Version + "_" + parent + "_" + tag + "_" + position, "mipmap", "com.nowui.crrc")));
+        private List<View> viewList;
 
-        introductionScrollView.addView(introductionImageView);
+        public BasePagerAdapter(List<View> viewList) {
+            this.viewList = viewList;
+        }
+
+        @Override
+        public int getCount() {
+            return viewList.size();
+        }
+
+        @Override
+        public boolean isViewFromObject(View view, Object object) {
+            return view == object;
+        }
+
+        @Override
+        public Object instantiateItem(View view, int position) {
+            ((ViewPager) view).addView(viewList.get(position));
+            return viewList.get(position);
+        }
+
+        @Override
+        public void destroyItem(View view, int position, Object object) {
+            ((ViewPager) view).removeView((View) viewList.get(position));
+        }
     }
 
 }

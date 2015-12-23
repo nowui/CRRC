@@ -13,6 +13,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.nowui.crrc.R;
@@ -115,20 +116,32 @@ public class VideoView extends RelativeLayout {
                 });
 
                 try {
-                    //AssetFileDescriptor fd = fd = myContext.getAssets().openFd("video_" + Helper.Version + ".mp4");
-                    //mediaPlayer.setDataSource(fd.getFileDescriptor(), fd.getStartOffset(), fd.getLength());
-                    if (Helper.Version == "all") {
+                    if (Helper.isPublish) {
+                        AssetFileDescriptor fd;
+                        if (Helper.Version == "all") {
+                            fd = myContext.getAssets().openFd("video_" + Helper.Language + "_" + Helper.Version + ".mp4");
+                        } else {
+                            fd = myContext.getAssets().openFd("video_" + Helper.Version + ".mp4");
+                        }
 
+                        mediaPlayer.setDataSource(fd.getFileDescriptor(), fd.getStartOffset(), fd.getLength());
                     } else {
-
+                        if (Helper.Version == "all") {
+                            mediaPlayer.setDataSource(Environment.getExternalStorageDirectory().getPath() + "/crrc/video_" + Helper.Language + "_" + Helper.Version + ".mp4");
+                        } else {
+                            mediaPlayer.setDataSource(Environment.getExternalStorageDirectory().getPath() + "/crrc/video_" + Helper.Version + ".mp4");
+                        }
                     }
 
-                    mediaPlayer.setDataSource(Environment.getExternalStorageDirectory().getPath() + "/crrc/video_" + Helper.Version + ".mp4");
                     mediaPlayer.prepare();
                     mediaPlayer.setVolume(1.0F, 1.0F);
                     mediaPlayer.start();
 
-                    handler.postDelayed(skipRunnable, 13700);
+                    if (Helper.Version == "all") {
+                        handler.postDelayed(skipRunnable, 27500);
+                    } else {
+                        handler.postDelayed(skipRunnable, 13700);
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -148,6 +161,16 @@ public class VideoView extends RelativeLayout {
             }
         });
 
+        ImageView logoImageView = new ImageView(myContext);
+        logoImageView.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("logo_" + Helper.Language, "mipmap", Helper.defPackage)));
+
+        RelativeLayout.LayoutParams logoImageViewLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        logoImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+        logoImageViewLayoutParams.topMargin = Helper.formatPix(myContext, 30);
+        logoImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+        logoImageViewLayoutParams.leftMargin = Helper.formatPix(myContext, 30);
+        contentRelativeLayout.addView(logoImageView, logoImageViewLayoutParams);
+
         skipImageButton = new ImageButton(context);
         skipImageButton.setImageDrawable(getResources().getDrawable(R.mipmap.skip_button));
         skipImageButton.getBackground().setAlpha(0);
@@ -156,7 +179,11 @@ public class VideoView extends RelativeLayout {
             public void onClick(View v) {
                 skipImageButton.setVisibility(INVISIBLE);
 
-                mediaPlayer.seekTo(13700);
+                if (Helper.Version == "all") {
+                    mediaPlayer.seekTo(27500);
+                } else {
+                    mediaPlayer.seekTo(13700);
+                }
             }
         });
 

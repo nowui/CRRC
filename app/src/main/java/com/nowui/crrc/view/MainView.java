@@ -112,7 +112,7 @@ public class MainView extends RelativeLayout {
 
     private void initBackground() {
         ImageView backgroundImageView = new ImageView(myContext);
-        backgroundImageView.setImageDrawable(getResources().getDrawable(R.mipmap.main_background));
+        backgroundImageView.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("main_background_" + Helper.Version, "mipmap", Helper.defPackage)));
 
         RelativeLayout.LayoutParams backgroundImageViewLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         backgroundImageViewLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
@@ -132,7 +132,9 @@ public class MainView extends RelativeLayout {
                         removeView(indexlView);
 
                         homeImageButton.setVisibility(View.VISIBLE);
-                        videoImageButton.setVisibility(View.VISIBLE);
+                        if (videoImageButton != null) {
+                            videoImageButton.setVisibility(View.VISIBLE);
+                        }
                         quitImageButton.setVisibility(View.VISIBLE);
                     }
                 });
@@ -143,7 +145,9 @@ public class MainView extends RelativeLayout {
                 addView(indexlView, indexlViewLayoutParams);
 
                 homeImageButton.setVisibility(View.INVISIBLE);
-                videoImageButton.setVisibility(View.INVISIBLE);
+                if (videoImageButton != null) {
+                    videoImageButton.setVisibility(View.INVISIBLE);
+                }
                 quitImageButton.setVisibility(View.INVISIBLE);
             }
         };
@@ -173,7 +177,7 @@ public class MainView extends RelativeLayout {
 
     private void initLogo() {
         ImageView logoImageView = new ImageView(myContext);
-        logoImageView.setImageDrawable(getResources().getDrawable(R.mipmap.logo));
+        logoImageView.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("logo_" + Helper.Language, "mipmap", Helper.defPackage)));
 
         RelativeLayout.LayoutParams logoImageViewLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         logoImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
@@ -185,7 +189,7 @@ public class MainView extends RelativeLayout {
 
     private void initHomeButton() {
         homeImageButton = new ImageButton(myContext);
-        homeImageButton.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("home_button_" + Helper.Language, "mipmap", "com.nowui.crrc")));
+        homeImageButton.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("home_button_" + Helper.Language, "mipmap", Helper.defPackage)));
         homeImageButton.getBackground().setAlpha(0);
         homeImageButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -210,7 +214,7 @@ public class MainView extends RelativeLayout {
 
     private void initVideoButton() {
         videoImageButton = new ImageButton(myContext);
-        videoImageButton.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("video_button_" + Helper.Language, "mipmap", "com.nowui.crrc")));
+        videoImageButton.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("video_button_" + Helper.Language, "mipmap", Helper.defPackage)));
         videoImageButton.getBackground().setAlpha(0);
         videoImageButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -231,7 +235,7 @@ public class MainView extends RelativeLayout {
 
     private void initQuitButton() {
         quitImageButton = new ImageButton(myContext);
-        quitImageButton.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("quit_button_" + Helper.Language, "mipmap", "com.nowui.crrc")));
+        quitImageButton.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("quit_button_" + Helper.Language, "mipmap", Helper.defPackage)));
         quitImageButton.getBackground().setAlpha(0);
         quitImageButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -248,6 +252,8 @@ public class MainView extends RelativeLayout {
         quitImageButtonLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         quitImageButtonLayoutParams.rightMargin = Helper.formatPix(myContext, 0);
         contentRelativeLayout.addView(quitImageButton, quitImageButtonLayoutParams);
+
+
     }
 
 }

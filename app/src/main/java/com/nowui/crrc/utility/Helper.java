@@ -24,8 +24,17 @@ public class Helper {
     public static int Width = 1920;
     public static int Height = 1080;
 
-    public static final String Language = "en";
-    //public static final String Language = "zh";
+    //public static final String defPackage = "com.nowui.crrc.en.cut";
+    //public static final String defPackage = "com.nowui.crrc.zh.cut";
+    public static final String defPackage = "com.nowui.crrc.en.all";
+    //public static final String defPackage = "com.nowui.crrc.zh.all";
+
+    public static final boolean isPublish = true;
+    //public static final boolean isPublish = false;
+
+    //public static final String Language = "en";
+    public static final String Language = "zh";
+
     //public static final String Version = "cut";
     public static final String Version = "all";
 
@@ -144,7 +153,7 @@ public class Helper {
         return wm.getDefaultDisplay().getHeight();
     }
 
-    /*public static int dip2px(Context context, float dpValue) {
+    public static int dip2px(Context context, float dpValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
     }
@@ -152,7 +161,7 @@ public class Helper {
     public static int px2dip(Context context, float pxValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
-    }*/
+    }
 
     public static int formatPix(Context context, float pixValue) {
         int width = 1920;

@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.nowui.crrc.R;
@@ -22,6 +23,7 @@ public class MainActivity extends Activity {
 
     private static final int SHOW_ANOTHER_ACTIVITY = 99;
     private RelativeLayout mainRelativeLayout;
+    private RelativeLayout contentRelativeLayout;
     StartView startView;
     VideoView videoView;
     MainView mainView;
@@ -49,18 +51,18 @@ public class MainActivity extends Activity {
         if (this.getResources().getDisplayMetrics().density == 2) {
             Helper.Width = 1280;
             Helper.Height = 720;
-
-            if(width < Helper.Width) {
-                Helper.Height = (int) Math.round(width * 1.0 / Helper.Width * Helper.Height);
-                Helper.Width = width;
-            }
         } else if (this.getResources().getDisplayMetrics().density == 3) {
             Helper.Width = 1920;
             Helper.Height = 1080;
         } else if (this.getResources().getDisplayMetrics().density == 4) {
             Helper.Width = 2560;
             Helper.Height = 1440;
+        } else if (this.getResources().getDisplayMetrics().density < 2) {
+            Helper.Width = 854;
+            Helper.Height = 480;
+        }
 
+        if(width < Helper.Width) {
             Helper.Height = (int) Math.round(width * 1.0 / Helper.Width * Helper.Height);
             Helper.Width = width;
         }
@@ -74,6 +76,25 @@ public class MainActivity extends Activity {
         mainView.setVisibility(View.VISIBLE);
 
         //initStartView();
+
+        contentRelativeLayout = new RelativeLayout(this);
+
+        RelativeLayout.LayoutParams contentRelativeLayoutParams = new RelativeLayout.LayoutParams(Helper.Width, Helper.Height);
+        contentRelativeLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        contentRelativeLayoutParams.addRule(RelativeLayout.CENTER_VERTICAL);
+        contentRelativeLayoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
+        mainRelativeLayout.addView(contentRelativeLayout, contentRelativeLayoutParams);
+
+        ImageView slImageView = new ImageView(this);
+        slImageView.setImageDrawable(getResources().getDrawable(R.mipmap.sl));
+        slImageView.setAlpha(0.5f);
+
+        RelativeLayout.LayoutParams slImageViewLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        slImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+        slImageViewLayoutParams.topMargin = Helper.formatPix(this, 50);
+        slImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+        slImageViewLayoutParams.leftMargin = Helper.formatPix(this, 50);
+        contentRelativeLayout.addView(slImageView, slImageViewLayoutParams);
     }
 
     @Override
@@ -194,7 +215,7 @@ public class MainActivity extends Activity {
             }
             case MotionEvent.ACTION_UP: {
                 if (mainView.getVisibility() == View.VISIBLE) {
-                    handler.sendEmptyMessageDelayed(SHOW_ANOTHER_ACTIVITY, 1000 * 60);
+                    handler.sendEmptyMessageDelayed(SHOW_ANOTHER_ACTIVITY, 1000 * 60 * 5);
                 }
                 break;
             }

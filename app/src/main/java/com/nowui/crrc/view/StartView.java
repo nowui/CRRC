@@ -69,12 +69,35 @@ public class StartView extends RelativeLayout {
 
         ImageView backgroundImageView = new ImageView(context);
         backgroundImageView.setImageDrawable(getResources().getDrawable(R.mipmap.start_background));
-        backgroundImageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 
         RelativeLayout.LayoutParams backgroundImageViewLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         backgroundImageViewLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
         backgroundImageViewLayoutParams.addRule(RelativeLayout.CENTER_VERTICAL);
         contentRelativeLayout.addView(backgroundImageView, backgroundImageViewLayoutParams);
+
+        RelativeLayout logoRelativeLayout = new RelativeLayout(myContext);
+
+        RelativeLayout.LayoutParams logoRelativeLayoutParams = new RelativeLayout.LayoutParams(Helper.formatPix(myContext, 504), Helper.formatPix(myContext, 197));
+        logoRelativeLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        logoRelativeLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+        logoRelativeLayoutParams.topMargin = Helper.formatPix(myContext, 400);
+        contentRelativeLayout.addView(logoRelativeLayout, logoRelativeLayoutParams);
+
+        ImageView startLogoBackgroundImageView = new ImageView(context);
+        startLogoBackgroundImageView.setImageDrawable(getResources().getDrawable(R.mipmap.start_logo_background));
+
+        RelativeLayout.LayoutParams startLogoBackgroundImageViewLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        startLogoBackgroundImageViewLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        startLogoBackgroundImageViewLayoutParams.addRule(RelativeLayout.CENTER_VERTICAL);
+        logoRelativeLayout.addView(startLogoBackgroundImageView, startLogoBackgroundImageViewLayoutParams);
+
+        ImageView startLogoImageView = new ImageView(context);
+        startLogoImageView.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("start_logo_" + Helper.Language, "mipmap", Helper.defPackage)));
+
+        RelativeLayout.LayoutParams startLogoImageViewLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        startLogoImageViewLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        startLogoImageViewLayoutParams.addRule(RelativeLayout.CENTER_VERTICAL);
+        logoRelativeLayout.addView(startLogoImageView, startLogoImageViewLayoutParams);
 
         ImageButton startImageButton = new ImageButton(context);
         startImageButton.setImageDrawable(getResources().getDrawable(R.mipmap.start_button));

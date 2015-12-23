@@ -89,20 +89,20 @@ public class MenuView extends RelativeLayout {
             bottomImageViewLayoutParams.bottomMargin = Helper.formatPix(myContext, 55);
         } else if(typeString.equals("right_right")) {
             bottomImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-            bottomImageViewLayoutParams.topMargin = Helper.formatPix(myContext, -5);
+            bottomImageViewLayoutParams.topMargin = Helper.formatPix(myContext, 6);
         } else {
             bottomImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
             bottomImageViewLayoutParams.topMargin = Helper.formatPix(myContext, 55);
         }
         if(typeString.equals("left")) {
             bottomImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-            bottomImageViewLayoutParams.leftMargin = Helper.formatPix(myContext, -5);
+            bottomImageViewLayoutParams.leftMargin = Helper.formatPix(myContext, 14);
         } else if(typeString.equals("right")) {
             bottomImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-            bottomImageViewLayoutParams.rightMargin = Helper.formatPix(myContext, -5);
+            bottomImageViewLayoutParams.rightMargin = Helper.formatPix(myContext, 14);
         } else if(typeString.equals("bottom")) {
             bottomImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-            bottomImageViewLayoutParams.leftMargin = Helper.formatPix(myContext, -3);
+            bottomImageViewLayoutParams.leftMargin = Helper.formatPix(myContext, 14);
         }
         this.addView(bottomImageView, bottomImageViewLayoutParams);
 
@@ -126,7 +126,7 @@ public class MenuView extends RelativeLayout {
 
     private void initTitle() {
         ImageButton titleImageButton = new ImageButton(myContext);
-        titleImageButton.setImageDrawable(getResources().getDrawable(getResources().getIdentifier(titleString, "mipmap", "com.nowui.crrc")));
+        titleImageButton.setImageDrawable(getResources().getDrawable(getResources().getIdentifier(titleString, "mipmap", Helper.defPackage)));
         titleImageButton.getBackground().setAlpha(0);
         titleImageButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -141,19 +141,22 @@ public class MenuView extends RelativeLayout {
         if(typeString.equals("bottom")) {
             titleImageButtonLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
             titleImageButtonLayoutParams.topMargin = Helper.formatPix(myContext, 25);
+        } else if(typeString.equals("right_right")) {
+            titleImageButtonLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+            titleImageButtonLayoutParams.topMargin = Helper.formatPix(myContext, 5);
         } else {
             titleImageButtonLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
             titleImageButtonLayoutParams.bottomMargin = Helper.formatPix(myContext, 20);
         }
         if(typeString.equals("left")) {
             titleImageButtonLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-            titleImageButtonLayoutParams.leftMargin = Helper.formatPix(myContext, 10);
+            titleImageButtonLayoutParams.leftMargin = Helper.formatPix(myContext, 30);
         } else if(typeString.equals("right")) {
             titleImageButtonLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-            titleImageButtonLayoutParams.rightMargin = Helper.formatPix(myContext, 10);
+            titleImageButtonLayoutParams.rightMargin = Helper.formatPix(myContext, 30);
         } else if(typeString.equals("bottom")) {
             titleImageButtonLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-            titleImageButtonLayoutParams.leftMargin = Helper.formatPix(myContext, 10);
+            titleImageButtonLayoutParams.leftMargin = Helper.formatPix(myContext, 30);
         } else if(typeString.equals("right_right")) {
             titleImageButtonLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
             titleImageButtonLayoutParams.leftMargin = Helper.formatPix(myContext, 40);
@@ -183,19 +186,22 @@ public class MenuView extends RelativeLayout {
         if(typeString.equals("bottom")) {
             locationImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
             locationImageViewLayoutParams.topMargin = Helper.formatPix(myContext, 20);
+        } else if(typeString.equals("right_right")) {
+            locationImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+            locationImageViewLayoutParams.topMargin = Helper.formatPix(myContext, 0);
         } else {
             locationImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
             locationImageViewLayoutParams.bottomMargin = Helper.formatPix(myContext, 25);
         }
         if(typeString.equals("left")) {
             locationImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-            locationImageViewLayoutParams.leftMargin = Helper.formatPix(myContext, -17);
+            locationImageViewLayoutParams.leftMargin = Helper.formatPix(myContext, 0);
         } else if(typeString.equals("right")) {
             locationImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-            locationImageViewLayoutParams.rightMargin = Helper.formatPix(myContext, -17);
+            locationImageViewLayoutParams.rightMargin = Helper.formatPix(myContext, 0);
         } else if(typeString.equals("bottom")) {
             locationImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-            locationImageViewLayoutParams.leftMargin = Helper.formatPix(myContext, -17);
+            locationImageViewLayoutParams.leftMargin = Helper.formatPix(myContext, 0);
         }
         this.addView(locationImageButton, locationImageViewLayoutParams);
 

@@ -82,7 +82,7 @@ public class IndexlView extends RelativeLayout {
 
     private void initBackground() {
         ImageView backgroundImageView = new ImageView(myContext);
-        backgroundImageView.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("index_background_" + Helper.Version + "_" + tag, "mipmap", "com.nowui.crrc")));
+        backgroundImageView.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("index_background_" + Helper.Version + "_" + tag, "mipmap", Helper.defPackage)));
 
         RelativeLayout.LayoutParams backgroundImageViewLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         backgroundImageViewLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
@@ -92,7 +92,7 @@ public class IndexlView extends RelativeLayout {
 
     private void initContent() {
         ImageView titleImageView = new ImageView(myContext);
-        titleImageView.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("index_title_" + Helper.Language + "_" + Helper.Version + "_" + tag, "mipmap", "com.nowui.crrc")));
+        titleImageView.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("index_title_" + Helper.Language + "_" + Helper.Version + "_" + tag, "mipmap", Helper.defPackage)));
 
         RelativeLayout.LayoutParams titleImageViewLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         titleImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
@@ -103,7 +103,7 @@ public class IndexlView extends RelativeLayout {
 
         if (Helper.Version == "all") {
             ImageView textImageView = new ImageView(myContext);
-            textImageView.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("index_text_" + Helper.Language + "_" + Helper.Version + "_" + tag, "mipmap", "com.nowui.crrc")));
+            textImageView.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("index_text_" + Helper.Language + "_" + Helper.Version + "_" + tag, "mipmap", Helper.defPackage)));
 
             RelativeLayout.LayoutParams textImageViewLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
             textImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
@@ -173,7 +173,7 @@ public class IndexlView extends RelativeLayout {
 
     private void initBackButton() {
         ImageButton backImageButton = new ImageButton(myContext);
-        backImageButton.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("back_button_" + Helper.Language, "mipmap", "com.nowui.crrc")));
+        backImageButton.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("back_button_" + Helper.Language, "mipmap", Helper.defPackage)));
         backImageButton.getBackground().setAlpha(0);
         backImageButton.setOnClickListener(new OnClickListener() {
             @Override
