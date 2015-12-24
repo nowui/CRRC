@@ -186,6 +186,8 @@ public class MainActivity extends Activity {
     private void showMainView() {
         startView.setVisibility(View.INVISIBLE);
         mainView.setVisibility(View.VISIBLE);
+
+        mainView.show();
     }
 
     private Runnable closeVideoViewRunnable = new Runnable() {

@@ -143,7 +143,7 @@ public class MenuView extends RelativeLayout {
             titleImageButtonLayoutParams.topMargin = Helper.formatPix(myContext, 25);
         } else if(typeString.equals("right_right")) {
             titleImageButtonLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-            titleImageButtonLayoutParams.topMargin = Helper.formatPix(myContext, 5);
+            titleImageButtonLayoutParams.topMargin = Helper.formatPix(myContext, 0);
         } else {
             titleImageButtonLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
             titleImageButtonLayoutParams.bottomMargin = Helper.formatPix(myContext, 20);
@@ -159,7 +159,7 @@ public class MenuView extends RelativeLayout {
             titleImageButtonLayoutParams.leftMargin = Helper.formatPix(myContext, 30);
         } else if(typeString.equals("right_right")) {
             titleImageButtonLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-            titleImageButtonLayoutParams.leftMargin = Helper.formatPix(myContext, 40);
+            titleImageButtonLayoutParams.leftMargin = Helper.formatPix(myContext, 50);
         }
         this.addView(titleImageButton, titleImageButtonLayoutParams);
     }
@@ -188,7 +188,7 @@ public class MenuView extends RelativeLayout {
             locationImageViewLayoutParams.topMargin = Helper.formatPix(myContext, 20);
         } else if(typeString.equals("right_right")) {
             locationImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-            locationImageViewLayoutParams.topMargin = Helper.formatPix(myContext, 0);
+            locationImageViewLayoutParams.topMargin = Helper.formatPix(myContext, 1);
         } else {
             locationImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
             locationImageViewLayoutParams.bottomMargin = Helper.formatPix(myContext, 25);

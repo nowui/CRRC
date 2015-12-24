@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -257,6 +258,21 @@ public class MainView extends RelativeLayout {
         quitImageButtonLayoutParams.rightMargin = Helper.formatPix(myContext, 0);
         contentRelativeLayout.addView(quitImageButton, quitImageButtonLayoutParams);
 
+
+    }
+
+    public void show() {
+        for(int i = 0; i < contentRelativeLayout.getChildCount(); i++) {
+            View view = contentRelativeLayout.getChildAt(i);
+            if(view instanceof MenuView) {
+                AlphaAnimation alphaAnim = new AlphaAnimation(0.0f, 1.0f);
+                alphaAnim.setDuration(1000);
+                view.startAnimation(alphaAnim);
+            }
+        }
+    }
+
+    public void hide() {
 
     }
 

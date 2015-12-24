@@ -1,9 +1,14 @@
 package com.nowui.crrc.view;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -18,6 +23,9 @@ public class IndexlView extends RelativeLayout {
 
     private Context myContext;
     private RelativeLayout contentRelativeLayout;
+    ImageView frameImageView;
+    private AnimationDrawable frameAnim;
+    private Handler handler = new Handler();
     private int tag;
 
     private OnClickIndexViewCloseButtonListener onClickIndexViewCloseButtonListener;
@@ -78,6 +86,20 @@ public class IndexlView extends RelativeLayout {
         initContent();
 
         initBackButton();
+
+        if (Helper.Version == "all" && tag == 4) {
+            frameImageView = new ImageView(myContext);
+            frameImageView.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("frame_0", "mipmap", Helper.defPackage)));
+
+            RelativeLayout.LayoutParams frameImageViewLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+            frameImageViewLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+            frameImageViewLayoutParams.addRule(RelativeLayout.CENTER_VERTICAL);
+            contentRelativeLayout.addView(frameImageView, frameImageViewLayoutParams);
+
+            handler.postDelayed(frameRunnable, 0);
+
+            handler.postDelayed(menuRunnable, 5500);
+        }
     }
 
     private void initBackground() {
@@ -149,7 +171,7 @@ public class IndexlView extends RelativeLayout {
             } else if(tag == 3) {
                 jsonString = "[{\"type\": \"right\", \"tag\": 0, \"title\": \"index_menu_title_" + Helper.Language + "_" + Helper.Version + "_3_0\", \"top\": 630, \"left\": 135 }, {\"type\": \"right\", \"tag\": 1, \"title\": \"index_menu_title_" + Helper.Language + "_" + Helper.Version + "_3_1\", \"top\": 590, \"left\": 350 }, {\"type\": \"left\", \"tag\": 2, \"title\": \"index_menu_title_" + Helper.Language + "_" + Helper.Version + "_3_2\", \"top\": 560, \"left\": 1000 }, {\"type\": \"left\", \"tag\": 3, \"title\": \"index_menu_title_" + Helper.Language + "_" + Helper.Version + "_3_3\", \"top\": 500, \"left\": 1260 }]";
             } else if(tag == 4) {
-                jsonString = "[{\"type\": \"right_right\", \"tag\": 0, \"title\": \"index_menu_title_" + Helper.Language + "_" + Helper.Version + "_4_0\", \"top\": 605, \"left\": 1025 }]";
+                jsonString = "[{\"type\": \"right_right\", \"tag\": 0, \"title\": \"index_menu_title_" + Helper.Language + "_" + Helper.Version + "_4_0\", \"top\": 595, \"left\": 1025 }]";
             }
         }
 
@@ -191,5 +213,38 @@ public class IndexlView extends RelativeLayout {
         backImageButtonLayoutParams.rightMargin = Helper.formatPix(myContext, 0);
         contentRelativeLayout.addView(backImageButton, backImageButtonLayoutParams);
     }
+
+    private void initFrameAnim() {
+        BitmapFactory.Options opts = new BitmapFactory.Options();
+        opts.inSampleSize = 2;
+
+        frameAnim = new AnimationDrawable();
+        for (int i = 0; i < 61; i++) {
+            frameAnim.addFrame(new BitmapDrawable(BitmapFactory.decodeResource(getResources(), getResources().getIdentifier("frame_" + i, "mipmap", Helper.defPackage), opts)), 61);
+        }
+
+        frameImageView.setImageDrawable(frameAnim);
+
+        frameAnim.start();
+    }
+
+    private Runnable frameRunnable = new Runnable() {
+        public void run() {
+            initFrameAnim();
+        }
+    };
+
+    private Runnable menuRunnable = new Runnable() {
+        public void run() {
+            for(int i = 0; i < contentRelativeLayout.getChildCount(); i++) {
+                View view = contentRelativeLayout.getChildAt(i);
+                if(view instanceof MenuView) {
+                    AlphaAnimation alphaAnim = new AlphaAnimation(0.0f, 1.0f);
+                    alphaAnim.setDuration(1000);
+                    view.startAnimation(alphaAnim);
+                }
+            }
+        }
+    };
 
 }
