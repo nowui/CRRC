@@ -103,7 +103,7 @@ public class MainView extends RelativeLayout {
 
         initHomeButton();
 
-        if (Helper.Version == "all") {
+        if (Helper.Version == "all" && Helper.isAd) {
             initVideoButton();
         }
 
@@ -207,7 +207,11 @@ public class MainView extends RelativeLayout {
         if (Helper.Version == "cut") {
             homeImageButtonLayoutParams.rightMargin = Helper.formatPix(myContext, 120);
         } else {
-            homeImageButtonLayoutParams.rightMargin = Helper.formatPix(myContext, 240);
+            if (Helper.isAd) {
+                homeImageButtonLayoutParams.rightMargin = Helper.formatPix(myContext, 240);
+            } else {
+                homeImageButtonLayoutParams.rightMargin = Helper.formatPix(myContext, 120);
+            }
         }
         contentRelativeLayout.addView(homeImageButton, homeImageButtonLayoutParams);
     }

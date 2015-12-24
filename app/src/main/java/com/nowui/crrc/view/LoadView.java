@@ -111,7 +111,11 @@ public class LoadView extends RelativeLayout {
                                        if (Helper.isPublish) {
                                            AssetFileDescriptor fd;
                                            if (Helper.Version == "all") {
-                                               fd = myContext.getAssets().openFd("load_" + Helper.Language + "_" + Helper.Version + ".mp4");
+                                               if (Helper.isAd) {
+                                                   fd = myContext.getAssets().openFd("load_" + Helper.Language + "_" + Helper.Version + ".mp4");
+                                               } else {
+                                                   fd = myContext.getAssets().openFd("video_" + Helper.Language + "_" + Helper.Version + ".mp4");
+                                               }
                                            } else {
                                                fd = myContext.getAssets().openFd("video_" + Helper.Version + ".mp4");
                                            }

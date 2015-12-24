@@ -73,9 +73,9 @@ public class MainActivity extends Activity {
         mainRelativeLayout = (RelativeLayout) findViewById(R.id.mainRelativeLayout);
 
         initMainView();
-        mainView.setVisibility(View.VISIBLE);
+        //mainView.setVisibility(View.VISIBLE);
 
-        //initStartView();
+        initStartView();
 
         contentRelativeLayout = new RelativeLayout(this);
 

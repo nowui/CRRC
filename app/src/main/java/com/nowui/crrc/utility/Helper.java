@@ -26,8 +26,10 @@ public class Helper {
 
     //public static final String defPackage = "com.nowui.crrc.en.cut";
     //public static final String defPackage = "com.nowui.crrc.zh.cut";
-    public static final String defPackage = "com.nowui.crrc.en.all";
+    //public static final String defPackage = "com.nowui.crrc.en.all";
+    //public static final String defPackage = "com.nowui.crrc.en.all.no";
     //public static final String defPackage = "com.nowui.crrc.zh.all";
+    public static final String defPackage = "com.nowui.crrc.zh.all.no";
 
     public static final boolean isPublish = true;
     //public static final boolean isPublish = false;
@@ -37,6 +39,9 @@ public class Helper {
 
     //public static final String Version = "cut";
     public static final String Version = "all";
+
+    //public static final boolean isAd = true;
+    public static final boolean isAd = false;
 
     //Key
     public static final String KeyId = "id";
