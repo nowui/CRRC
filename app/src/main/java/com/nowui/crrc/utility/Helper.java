@@ -31,8 +31,8 @@ public class Helper {
     //public static final String defPackage = "com.nowui.crrc.zh.all";
     public static final String defPackage = "com.nowui.crrc.zh.all.no";
 
-    //public static final boolean isPublish = true;
-    public static final boolean isPublish = false;
+    public static final boolean isPublish = true;
+    //public static final boolean isPublish = false;
 
     //public static final String Language = "en";
     public static final String Language = "zh";

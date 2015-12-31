@@ -48,7 +48,7 @@ public class MainActivity extends Activity {
 
         System.out.println(this.getResources().getDisplayMetrics().density);
 
-        if (this.getResources().getDisplayMetrics().density == 2) {
+        /*if (this.getResources().getDisplayMetrics().density == 2) {
             Helper.Width = 1280;
             Helper.Height = 720;
         } else if (this.getResources().getDisplayMetrics().density == 3) {
@@ -60,12 +60,12 @@ public class MainActivity extends Activity {
         } else if (this.getResources().getDisplayMetrics().density < 2) {
             Helper.Width = 854;
             Helper.Height = 480;
-        }
+        }*/
 
-        if(width < Helper.Width) {
+        //if(width < Helper.Width) {
             Helper.Height = (int) Math.round(width * 1.0 / Helper.Width * Helper.Height);
             Helper.Width = width;
-        }
+        //}
 
         System.out.println("Helper.Width:" + Helper.Width);
         System.out.println("Helper.Height:" + Helper.Height);
@@ -85,7 +85,7 @@ public class MainActivity extends Activity {
         contentRelativeLayoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
         mainRelativeLayout.addView(contentRelativeLayout, contentRelativeLayoutParams);
 
-        ImageView slImageView = new ImageView(this);
+        /*ImageView slImageView = new ImageView(this);
         slImageView.setImageDrawable(getResources().getDrawable(R.mipmap.sl));
         slImageView.setAlpha(0.5f);
 
@@ -94,7 +94,9 @@ public class MainActivity extends Activity {
         slImageViewLayoutParams.topMargin = Helper.formatPix(this, 50);
         slImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
         slImageViewLayoutParams.leftMargin = Helper.formatPix(this, 50);
-        contentRelativeLayout.addView(slImageView, slImageViewLayoutParams);
+        slImageViewLayoutParams.width = Helper.formatPix(this, 500);
+        slImageViewLayoutParams.height = Helper.formatPix(this, 107);
+        contentRelativeLayout.addView(slImageView, slImageViewLayoutParams);*/
     }
 
     @Override
@@ -148,7 +150,7 @@ public class MainActivity extends Activity {
         mainView.setOnClickVideoButtonListener(new MainView.OnClickVideoButtonListener() {
             @Override
             public void OnClick() {
-                initLoadView();
+                initLoadView(false);
             }
         });
         mainView.setOnClickQuitButtonListener(new MainView.OnClickQuitButtonListener() {
@@ -162,10 +164,10 @@ public class MainActivity extends Activity {
         mainRelativeLayout.addView(mainView, mainViewPagerLayoutParams);
     }
 
-    private void initLoadView() {
+    private void initLoadView(boolean isLoad) {
         System.out.println("init load view");
 
-        final LoadView loadView = new LoadView(this);
+        final LoadView loadView = new LoadView(this, isLoad);
         loadView.setVisibility(View.VISIBLE);
         loadView.setOnOnCompletionListener(new LoadView.OnOnCompletionListener() {
             @Override
@@ -186,8 +188,6 @@ public class MainActivity extends Activity {
     private void showMainView() {
         startView.setVisibility(View.INVISIBLE);
         mainView.setVisibility(View.VISIBLE);
-
-        mainView.show();
     }
 
     private Runnable closeVideoViewRunnable = new Runnable() {
@@ -201,7 +201,7 @@ public class MainActivity extends Activity {
         public void handleMessage(Message msg) {
             switch(msg.what) {
                 case SHOW_ANOTHER_ACTIVITY:
-                    initLoadView();
+                    initLoadView(true);
 
                     break;
             }

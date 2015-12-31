@@ -73,6 +73,8 @@ public class StartView extends RelativeLayout {
         RelativeLayout.LayoutParams backgroundImageViewLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         backgroundImageViewLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
         backgroundImageViewLayoutParams.addRule(RelativeLayout.CENTER_VERTICAL);
+        backgroundImageViewLayoutParams.width = Helper.formatPix(myContext, 1920);
+        backgroundImageViewLayoutParams.height = Helper.formatPix(myContext, 1080);
         contentRelativeLayout.addView(backgroundImageView, backgroundImageViewLayoutParams);
 
         RelativeLayout logoRelativeLayout = new RelativeLayout(myContext);
@@ -89,6 +91,8 @@ public class StartView extends RelativeLayout {
         RelativeLayout.LayoutParams startLogoBackgroundImageViewLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         startLogoBackgroundImageViewLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
         startLogoBackgroundImageViewLayoutParams.addRule(RelativeLayout.CENTER_VERTICAL);
+        startLogoBackgroundImageViewLayoutParams.width = Helper.formatPix(myContext, 504);
+        startLogoBackgroundImageViewLayoutParams.height = Helper.formatPix(myContext, 197);
         logoRelativeLayout.addView(startLogoBackgroundImageView, startLogoBackgroundImageViewLayoutParams);
 
         ImageView startLogoImageView = new ImageView(context);
@@ -97,25 +101,28 @@ public class StartView extends RelativeLayout {
         RelativeLayout.LayoutParams startLogoImageViewLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         startLogoImageViewLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
         startLogoImageViewLayoutParams.addRule(RelativeLayout.CENTER_VERTICAL);
+        startLogoImageViewLayoutParams.width = Helper.formatPix(myContext, 328);
+        startLogoImageViewLayoutParams.height = Helper.formatPix(myContext, 109);
         logoRelativeLayout.addView(startLogoImageView, startLogoImageViewLayoutParams);
 
-        ImageButton startImageButton = new ImageButton(context);
-        startImageButton.setImageDrawable(getResources().getDrawable(R.mipmap.start_button));
-        startImageButton.getBackground().setAlpha(0);
-        startImageButton.setOnClickListener(new OnClickListener() {
+        ImageView startImageView = new ImageView(context);
+        startImageView.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("start_button", "mipmap", Helper.defPackage)));
+        startImageView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-            if(onClickStartButtonListener != null) {
-                onClickStartButtonListener.OnClick();
-            }
+                if (onClickStartButtonListener != null) {
+                    onClickStartButtonListener.OnClick();
+                }
             }
         });
 
-        RelativeLayout.LayoutParams startImageButtonLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        startImageButtonLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
-        startImageButtonLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-        startImageButtonLayoutParams.topMargin = Helper.formatPix(myContext, 640);
-        contentRelativeLayout.addView(startImageButton, startImageButtonLayoutParams);
+        RelativeLayout.LayoutParams startImageViewLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        startImageViewLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        startImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+        startImageViewLayoutParams.topMargin = Helper.formatPix(myContext, 640);
+        startImageViewLayoutParams.width = Helper.formatPix(myContext, 117);
+        startImageViewLayoutParams.height = Helper.formatPix(myContext, 104);
+        contentRelativeLayout.addView(startImageView, startImageViewLayoutParams);
     }
 
 }

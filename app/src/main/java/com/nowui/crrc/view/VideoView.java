@@ -30,7 +30,7 @@ public class VideoView extends RelativeLayout {
     private SurfaceView surfaceView;
     private SurfaceHolder holder;
     private MediaPlayer mediaPlayer;
-    private ImageButton skipImageButton;
+    private ImageView skipImageView;
     private Handler handler = new Handler();
 
     private OnOnCompletionListener onOnCompletionListener;
@@ -140,7 +140,7 @@ public class VideoView extends RelativeLayout {
                     if (Helper.Version == "all") {
                         handler.postDelayed(skipRunnable, 27500);
                     } else {
-                        handler.postDelayed(skipRunnable, 13700);
+                        handler.postDelayed(skipRunnable, 14000);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -169,35 +169,38 @@ public class VideoView extends RelativeLayout {
         logoImageViewLayoutParams.topMargin = Helper.formatPix(myContext, 30);
         logoImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
         logoImageViewLayoutParams.leftMargin = Helper.formatPix(myContext, 30);
+        logoImageViewLayoutParams.width = Helper.formatPix(myContext, 227);
+        logoImageViewLayoutParams.height = Helper.formatPix(myContext, 100);
         contentRelativeLayout.addView(logoImageView, logoImageViewLayoutParams);
 
-        skipImageButton = new ImageButton(context);
-        skipImageButton.setImageDrawable(getResources().getDrawable(R.mipmap.skip_button));
-        skipImageButton.getBackground().setAlpha(0);
-        skipImageButton.setOnClickListener(new OnClickListener() {
+        skipImageView = new ImageView(context);
+        skipImageView.setImageDrawable(getResources().getDrawable(R.mipmap.skip_button));
+        skipImageView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                skipImageButton.setVisibility(INVISIBLE);
+                skipImageView.setVisibility(INVISIBLE);
 
                 if (Helper.Version == "all") {
                     mediaPlayer.seekTo(27500);
                 } else {
-                    mediaPlayer.seekTo(13700);
+                    mediaPlayer.seekTo(14000);
                 }
             }
         });
 
-        RelativeLayout.LayoutParams skipImageButtonLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        skipImageButtonLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        skipImageButtonLayoutParams.bottomMargin = Helper.formatPix(myContext, 10);
-        skipImageButtonLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        skipImageButtonLayoutParams.rightMargin = Helper.formatPix(myContext, 10);
-        contentRelativeLayout.addView(skipImageButton, skipImageButtonLayoutParams);
+        RelativeLayout.LayoutParams skipImageViewLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        skipImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        skipImageViewLayoutParams.bottomMargin = Helper.formatPix(myContext, 30);
+        skipImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        skipImageViewLayoutParams.rightMargin = Helper.formatPix(myContext, 30);
+        skipImageViewLayoutParams.width = Helper.formatPix(myContext, 76);
+        skipImageViewLayoutParams.height = Helper.formatPix(myContext, 76);
+        contentRelativeLayout.addView(skipImageView, skipImageViewLayoutParams);
     }
 
     private Runnable skipRunnable = new Runnable() {
         public void run() {
-            skipImageButton.setVisibility(INVISIBLE);
+            skipImageView.setVisibility(INVISIBLE);
         }
     };
 

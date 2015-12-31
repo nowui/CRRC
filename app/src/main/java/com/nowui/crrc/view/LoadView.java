@@ -26,6 +26,7 @@ public class LoadView extends RelativeLayout {
     private SurfaceHolder holder;
     private MediaPlayer mediaPlayer;
     private ImageButton closeImageButton;
+    private boolean isLoad;
 
     private OnOnCompletionListener onOnCompletionListener;
 
@@ -37,8 +38,10 @@ public class LoadView extends RelativeLayout {
         onOnCompletionListener = listener;
     }
 
-    public LoadView(Context context) {
+    public LoadView(Context context, boolean isLoad) {
         super(context);
+
+        this.isLoad = isLoad;
 
         myContext = context;
 
@@ -114,7 +117,11 @@ public class LoadView extends RelativeLayout {
                                                if (Helper.isAd) {
                                                    fd = myContext.getAssets().openFd("load_" + Helper.Language + "_" + Helper.Version + ".mp4");
                                                } else {
-                                                   fd = myContext.getAssets().openFd("video_" + Helper.Language + "_" + Helper.Version + ".mp4");
+                                                   if (isLoad) {
+                                                       fd = myContext.getAssets().openFd("video_" + Helper.Language + "_" + Helper.Version + ".mp4");
+                                                   } else {
+                                                       fd = myContext.getAssets().openFd("load_" + Helper.Language + "_" + Helper.Version + ".mp4");
+                                                   }
                                                }
                                            } else {
                                                fd = myContext.getAssets().openFd("video_" + Helper.Version + ".mp4");

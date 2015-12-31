@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -20,9 +19,9 @@ public class MainView extends RelativeLayout {
 
     private Context myContext;
     private RelativeLayout contentRelativeLayout;
-    private ImageButton homeImageButton;
-    private ImageButton videoImageButton;
-    private ImageButton quitImageButton;
+    private ImageView homeImageView;
+    private ImageView videoImageView;
+    private ImageView quitImageView;
 
     private OnClickHomeButtonListener onClickHomeButtonListener;
 
@@ -104,7 +103,7 @@ public class MainView extends RelativeLayout {
 
         initHomeButton();
 
-        if (Helper.Version == "all" && Helper.isAd) {
+        if (Helper.Version == "all") {
             initVideoButton();
         }
 
@@ -118,6 +117,8 @@ public class MainView extends RelativeLayout {
         RelativeLayout.LayoutParams backgroundImageViewLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         backgroundImageViewLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
         backgroundImageViewLayoutParams.addRule(RelativeLayout.CENTER_VERTICAL);
+        backgroundImageViewLayoutParams.width = Helper.formatPix(myContext, 1920);
+        backgroundImageViewLayoutParams.height = Helper.formatPix(myContext, 1080);
         contentRelativeLayout.addView(backgroundImageView, backgroundImageViewLayoutParams);
     }
 
@@ -132,11 +133,11 @@ public class MainView extends RelativeLayout {
                     public void OnClick() {
                         removeView(indexlView);
 
-                        homeImageButton.setVisibility(View.VISIBLE);
-                        if (videoImageButton != null) {
-                            videoImageButton.setVisibility(View.VISIBLE);
+                        homeImageView.setVisibility(View.VISIBLE);
+                        if (videoImageView != null) {
+                            videoImageView.setVisibility(View.VISIBLE);
                         }
-                        quitImageButton.setVisibility(View.VISIBLE);
+                        quitImageView.setVisibility(View.VISIBLE);
                     }
                 });
 
@@ -145,25 +146,48 @@ public class MainView extends RelativeLayout {
                 indexlViewLayoutParams.addRule(RelativeLayout.CENTER_VERTICAL);
                 addView(indexlView, indexlViewLayoutParams);
 
-                homeImageButton.setVisibility(View.INVISIBLE);
-                if (videoImageButton != null) {
-                    videoImageButton.setVisibility(View.INVISIBLE);
+                homeImageView.setVisibility(View.INVISIBLE);
+                if (videoImageView != null) {
+                    videoImageView.setVisibility(View.INVISIBLE);
                 }
-                quitImageButton.setVisibility(View.INVISIBLE);
+                quitImageView.setVisibility(View.INVISIBLE);
             }
         };
 
-        String jsonString = "[{\"type\": \"left\", \"tag\": 0, \"title\": \"main_menu_title_" + Helper.Language + "_" + Helper.Version + "_0\", \"top\": 565, \"left\": 670 }, {\"type\": \"left\", \"tag\": 1, \"title\": \"main_menu_title_" + Helper.Language + "_" + Helper.Version + "_1\", \"top\": 445, \"left\": 925 }]";
+        String jsonString = "[";
         if(Helper.Version == "all") {
-            jsonString = "[{\"type\": \"left\", \"tag\": 0, \"title\": \"main_menu_title_" + Helper.Language + "_" + Helper.Version + "_0\", \"top\": 300, \"left\": 130 }, {\"type\": \"left\", \"tag\": 1, \"title\": \"main_menu_title_" + Helper.Language + "_" + Helper.Version + "_1\", \"top\": 120, \"left\": 570 }, {\"type\": \"left\", \"tag\": 2, \"title\": \"main_menu_title_" + Helper.Language + "_" + Helper.Version + "_2\", \"top\": 565, \"left\": 670 }, {\"type\": \"left\", \"tag\": 3, \"title\": \"main_menu_title_" + Helper.Language + "_" + Helper.Version + "_3\", \"top\": 445, \"left\": 925 }, {\"type\": \"right_right\", \"tag\": 4, \"title\": \"main_menu_title_" + Helper.Language + "_" + Helper.Version + "_4\", \"top\": 610, \"left\": 910 }]";
+            if (Helper.Language == "zh") {
+                jsonString += "{\"type\": \"left\", \"tag\": 0, \"title\": \"main_menu_title_zh_all_0\", \"top\": 300, \"left\": 130, \"width\": 120, \"height\": 31 }";
+                jsonString += ", {\"type\": \"left\", \"tag\": 1, \"title\": \"main_menu_title_zh_all_1\", \"top\": 120, \"left\": 570, \"width\": 120, \"height\": 31 }";
+                jsonString += ", {\"type\": \"left\", \"tag\": 2, \"title\": \"main_menu_title_zh_all_2\", \"top\": 565, \"left\": 670, \"width\": 139, \"height\": 31 }";
+                jsonString += ", {\"type\": \"left\", \"tag\": 3, \"title\": \"main_menu_title_zh_all_3\", \"top\": 445, \"left\": 925, \"width\": 110, \"height\": 31 }";
+                jsonString += ", {\"type\": \"right_right\", \"tag\": 4, \"title\": \"main_menu_title_zh_all_4\", \"top\": 610, \"left\": 910, \"width\": 120, \"height\": 31 }";
+            } else if (Helper.Language == "en") {
+                jsonString += "{\"type\": \"left\", \"tag\": 0, \"title\": \"main_menu_title_en_all_0\", \"top\": 300, \"left\": 130, \"width\": 214, \"height\": 31 }";
+                jsonString += ", {\"type\": \"left\", \"tag\": 1, \"title\": \"main_menu_title_en_all_1\", \"top\": 120, \"left\": 570, \"width\": 152, \"height\": 31 }";
+                jsonString += ", {\"type\": \"left\", \"tag\": 2, \"title\": \"main_menu_title_en_all_2\", \"top\": 565, \"left\": 670, \"width\": 231, \"height\": 31 }";
+                jsonString += ", {\"type\": \"left\", \"tag\": 3, \"title\": \"main_menu_title_en_all_3\", \"top\": 445, \"left\": 925, \"width\": 152, \"height\": 31 }";
+                jsonString += ", {\"type\": \"right_right\", \"tag\": 4, \"title\": \"main_menu_title_en_all_4\", \"top\": 610, \"left\": 910, \"width\": 276, \"height\": 31 }";
+            }
+        } else if(Helper.Version == "cut") {
+                if (Helper.Language == "zh") {
+                    jsonString += "{\"type\": \"left\", \"tag\": 0, \"title\": \"main_menu_title_zh_cut_0\", \"top\": 565, \"left\": 670, \"width\": 140, \"height\": 31 }";
+                    jsonString += ", {\"type\": \"left\", \"tag\": 1, \"title\": \"main_menu_title_zh_cut_1\", \"top\": 445, \"left\": 925, \"width\": 120, \"height\": 31 }";
+                } else if (Helper.Language == "en") {
+                    jsonString += "{\"type\": \"left\", \"tag\": 0, \"title\": \"main_menu_title_en_cut_0\", \"top\": 565, \"left\": 670, \"width\": 222, \"height\": 31 }";
+                    jsonString += ", {\"type\": \"left\", \"tag\": 1, \"title\": \"main_menu_title_en_cut_1\", \"top\": 445, \"left\": 925, \"width\": 166, \"height\": 31 }";
+                }
         }
+        jsonString += "]";
+
+        System.out.println(jsonString);
 
         JSONArray jsonArray = JSON.parseArray(jsonString);
 
         for (int i = 0; i < jsonArray.size(); i++) {
             JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-            MenuView menuView = new MenuView(myContext, jsonObject.get("type").toString(), jsonObject.get("title").toString());
+            MenuView menuView = new MenuView(myContext, jsonObject.get("type").toString(), jsonObject.get("title").toString(), (int) jsonObject.get("width"), (int) jsonObject.get("height"));
             menuView.setTag(jsonObject.get("tag"));
             menuView.setOnClickMenuViewListener(onClickMenuViewListener);
 
@@ -185,14 +209,15 @@ public class MainView extends RelativeLayout {
         logoImageViewLayoutParams.topMargin = Helper.formatPix(myContext, 30);
         logoImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
         logoImageViewLayoutParams.leftMargin = Helper.formatPix(myContext, 30);
+        logoImageViewLayoutParams.width = Helper.formatPix(myContext, 227);
+        logoImageViewLayoutParams.height = Helper.formatPix(myContext, 100);
         contentRelativeLayout.addView(logoImageView, logoImageViewLayoutParams);
     }
 
     private void initHomeButton() {
-        homeImageButton = new ImageButton(myContext);
-        homeImageButton.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("home_button_" + Helper.Language, "mipmap", Helper.defPackage)));
-        homeImageButton.getBackground().setAlpha(0);
-        homeImageButton.setOnClickListener(new OnClickListener() {
+        homeImageView = new ImageView(myContext);
+        homeImageView.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("home_button_" + Helper.Language, "mipmap", Helper.defPackage)));
+        homeImageView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (onClickHomeButtonListener != null) {
@@ -201,27 +226,24 @@ public class MainView extends RelativeLayout {
             }
         });
 
-        RelativeLayout.LayoutParams homeImageButtonLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        homeImageButtonLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        homeImageButtonLayoutParams.bottomMargin = Helper.formatPix(myContext, 0);
-        homeImageButtonLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        RelativeLayout.LayoutParams homeImageViewLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        homeImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        homeImageViewLayoutParams.bottomMargin = Helper.formatPix(myContext, 30);
+        homeImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         if (Helper.Version == "cut") {
-            homeImageButtonLayoutParams.rightMargin = Helper.formatPix(myContext, 120);
+            homeImageViewLayoutParams.rightMargin = Helper.formatPix(myContext, 30 + 76 + 30);
         } else {
-            if (Helper.isAd) {
-                homeImageButtonLayoutParams.rightMargin = Helper.formatPix(myContext, 240);
-            } else {
-                homeImageButtonLayoutParams.rightMargin = Helper.formatPix(myContext, 120);
-            }
+            homeImageViewLayoutParams.rightMargin = Helper.formatPix(myContext, 30 + 76 + 30 + 76 + 30);
         }
-        contentRelativeLayout.addView(homeImageButton, homeImageButtonLayoutParams);
+        homeImageViewLayoutParams.width = Helper.formatPix(myContext, 76);
+        homeImageViewLayoutParams.height = Helper.formatPix(myContext, 76);
+        contentRelativeLayout.addView(homeImageView, homeImageViewLayoutParams);
     }
 
     private void initVideoButton() {
-        videoImageButton = new ImageButton(myContext);
-        videoImageButton.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("video_button_" + Helper.Language, "mipmap", Helper.defPackage)));
-        videoImageButton.getBackground().setAlpha(0);
-        videoImageButton.setOnClickListener(new OnClickListener() {
+        videoImageView = new ImageView(myContext);
+        videoImageView.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("video_button_" + Helper.Language, "mipmap", Helper.defPackage)));
+        videoImageView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (onClickVideoButtonListener != null) {
@@ -230,19 +252,20 @@ public class MainView extends RelativeLayout {
             }
         });
 
-        RelativeLayout.LayoutParams videoImageButtonButtonLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        videoImageButtonButtonLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        videoImageButtonButtonLayoutParams.bottomMargin = Helper.formatPix(myContext, 0);
-        videoImageButtonButtonLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        videoImageButtonButtonLayoutParams.rightMargin = Helper.formatPix(myContext, 120);
-        contentRelativeLayout.addView(videoImageButton, videoImageButtonButtonLayoutParams);
+        RelativeLayout.LayoutParams videoImageViewLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        videoImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        videoImageViewLayoutParams.bottomMargin = Helper.formatPix(myContext, 30);
+        videoImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        videoImageViewLayoutParams.rightMargin = Helper.formatPix(myContext, 30 + 76 + 30);
+        videoImageViewLayoutParams.width = Helper.formatPix(myContext, 76);
+        videoImageViewLayoutParams.height = Helper.formatPix(myContext, 76);
+        contentRelativeLayout.addView(videoImageView, videoImageViewLayoutParams);
     }
 
     private void initQuitButton() {
-        quitImageButton = new ImageButton(myContext);
-        quitImageButton.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("quit_button_" + Helper.Language, "mipmap", Helper.defPackage)));
-        quitImageButton.getBackground().setAlpha(0);
-        quitImageButton.setOnClickListener(new OnClickListener() {
+        quitImageView = new ImageView(myContext);
+        quitImageView.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("quit_button_" + Helper.Language, "mipmap", Helper.defPackage)));
+        quitImageView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (onClickQuitButtonListener != null) {
@@ -251,22 +274,26 @@ public class MainView extends RelativeLayout {
             }
         });
 
-        RelativeLayout.LayoutParams quitImageButtonLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        quitImageButtonLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        quitImageButtonLayoutParams.bottomMargin = Helper.formatPix(myContext, 0);
-        quitImageButtonLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        quitImageButtonLayoutParams.rightMargin = Helper.formatPix(myContext, 0);
-        contentRelativeLayout.addView(quitImageButton, quitImageButtonLayoutParams);
+        RelativeLayout.LayoutParams quitImageViewLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        quitImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        quitImageViewLayoutParams.bottomMargin = Helper.formatPix(myContext, 30);
+        quitImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        quitImageViewLayoutParams.rightMargin = Helper.formatPix(myContext, 30);
+        quitImageViewLayoutParams.width = Helper.formatPix(myContext, 76);
+        quitImageViewLayoutParams.height = Helper.formatPix(myContext, 76);
+        contentRelativeLayout.addView(quitImageView, quitImageViewLayoutParams);
 
 
     }
 
+<<<<<<< HEAD
     public void show() {
         for(int i = 0; i < contentRelativeLayout.getChildCount(); i++) {
             View view = contentRelativeLayout.getChildAt(i);
             if(view instanceof MenuView) {
                 AlphaAnimation alphaAnim = new AlphaAnimation(0.0f, 1.0f);
                 alphaAnim.setDuration(1000);
+                alphaAnim.setRepeatCount(0);
                 view.startAnimation(alphaAnim);
             }
         }
@@ -276,4 +303,6 @@ public class MainView extends RelativeLayout {
 
     }
 
+=======
+>>>>>>> parent of d736652... 2015-12-24 16：37
 }
