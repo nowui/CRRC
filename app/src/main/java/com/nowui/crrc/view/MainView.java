@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -286,7 +287,6 @@ public class MainView extends RelativeLayout {
 
     }
 
-<<<<<<< HEAD
     public void show() {
         for(int i = 0; i < contentRelativeLayout.getChildCount(); i++) {
             View view = contentRelativeLayout.getChildAt(i);
@@ -303,6 +303,4 @@ public class MainView extends RelativeLayout {
 
     }
 
-=======
->>>>>>> parent of d736652... 2015-12-24 16：37
 }
