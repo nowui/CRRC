@@ -159,13 +159,10 @@ public class MenuView extends RelativeLayout {
             titleImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
             titleImageViewLayoutParams.topMargin = Helper.formatPix(myContext, 55);
         } else if(typeString.equals("right_right")) {
-<<<<<<< HEAD
             titleImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
             titleImageViewLayoutParams.topMargin = Helper.formatPix(myContext, 28);
-=======
-            titleImageButtonLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-            titleImageButtonLayoutParams.topMargin = Helper.formatPix(myContext, 5);
->>>>>>> parent of d736652... 2015-12-24 16：37
+            titleImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+            titleImageViewLayoutParams.topMargin = Helper.formatPix(myContext, 5);
         } else {
             titleImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
             titleImageViewLayoutParams.topMargin = Helper.formatPix(myContext, 15);
@@ -181,13 +178,10 @@ public class MenuView extends RelativeLayout {
             titleImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
             titleImageViewLayoutParams.leftMargin = Helper.formatPix(myContext, 62);
         } else if(typeString.equals("right_right")) {
-<<<<<<< HEAD
             titleImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
             titleImageViewLayoutParams.leftMargin = Helper.formatPix(myContext, 83);
-=======
-            titleImageButtonLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-            titleImageButtonLayoutParams.leftMargin = Helper.formatPix(myContext, 40);
->>>>>>> parent of d736652... 2015-12-24 16：37
+            titleImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+            titleImageViewLayoutParams.leftMargin = Helper.formatPix(myContext, 40);
         }
 
         titleImageViewLayoutParams.width = Helper.formatPix(myContext, widthInt);
@@ -220,11 +214,8 @@ public class MenuView extends RelativeLayout {
             locationImageViewLayoutParams.topMargin = Helper.formatPix(myContext, 33);
         } else if(typeString.equals("right_right")) {
             locationImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-<<<<<<< HEAD
             locationImageViewLayoutParams.topMargin = Helper.formatPix(myContext, 22);
-=======
             locationImageViewLayoutParams.topMargin = Helper.formatPix(myContext, 0);
->>>>>>> parent of d736652... 2015-12-24 16：37
         } else {
             locationImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
             locationImageViewLayoutParams.topMargin = Helper.formatPix(myContext, 0);
