@@ -158,25 +158,25 @@ public class MainView extends RelativeLayout {
         String jsonString = "[";
         if(Helper.Version == "all") {
             if (Helper.Language == "zh") {
-                jsonString += "{\"type\": \"left\", \"tag\": 0, \"title\": \"main_menu_title_zh_all_0\", \"top\": 300, \"left\": 130, \"width\": 120, \"height\": 31 }";
-                jsonString += ", {\"type\": \"left\", \"tag\": 1, \"title\": \"main_menu_title_zh_all_1\", \"top\": 120, \"left\": 570, \"width\": 120, \"height\": 31 }";
-                jsonString += ", {\"type\": \"left\", \"tag\": 2, \"title\": \"main_menu_title_zh_all_2\", \"top\": 565, \"left\": 670, \"width\": 139, \"height\": 31 }";
-                jsonString += ", {\"type\": \"left\", \"tag\": 3, \"title\": \"main_menu_title_zh_all_3\", \"top\": 445, \"left\": 925, \"width\": 110, \"height\": 31 }";
-                jsonString += ", {\"type\": \"right_right\", \"tag\": 4, \"title\": \"main_menu_title_zh_all_4\", \"top\": 610, \"left\": 910, \"width\": 120, \"height\": 31 }";
+                jsonString += "{\"type\": \"left\", \"tag\": 0, \"title\": \"main_menu_title_zh_all_0\", \"top\": 410, \"left\": 90, \"width\": 120, \"height\": 31 }";
+                jsonString += ", {\"type\": \"left\", \"tag\": 1, \"title\": \"main_menu_title_zh_all_1\", \"top\": 5, \"left\": 705, \"width\": 120, \"height\": 31 }";
+                jsonString += ", {\"type\": \"left\", \"tag\": 2, \"title\": \"main_menu_title_zh_all_2\", \"top\": 730, \"left\": 220, \"width\": 139, \"height\": 31 }";
+                jsonString += ", {\"type\": \"left\", \"tag\": 3, \"title\": \"main_menu_title_zh_all_3\", \"top\": 615, \"left\": 485, \"width\": 110, \"height\": 31 }";
+                jsonString += ", {\"type\": \"right_right\", \"tag\": 4, \"title\": \"main_menu_title_zh_all_4\", \"top\": 700, \"left\": 630, \"width\": 140, \"height\": 31 }";
             } else if (Helper.Language == "en") {
-                jsonString += "{\"type\": \"left\", \"tag\": 0, \"title\": \"main_menu_title_en_all_0\", \"top\": 300, \"left\": 130, \"width\": 214, \"height\": 31 }";
-                jsonString += ", {\"type\": \"left\", \"tag\": 1, \"title\": \"main_menu_title_en_all_1\", \"top\": 120, \"left\": 570, \"width\": 152, \"height\": 31 }";
-                jsonString += ", {\"type\": \"left\", \"tag\": 2, \"title\": \"main_menu_title_en_all_2\", \"top\": 565, \"left\": 670, \"width\": 231, \"height\": 31 }";
-                jsonString += ", {\"type\": \"left\", \"tag\": 3, \"title\": \"main_menu_title_en_all_3\", \"top\": 445, \"left\": 925, \"width\": 152, \"height\": 31 }";
-                jsonString += ", {\"type\": \"right_right\", \"tag\": 4, \"title\": \"main_menu_title_en_all_4\", \"top\": 610, \"left\": 910, \"width\": 276, \"height\": 31 }";
+                jsonString += "{\"type\": \"left\", \"tag\": 0, \"title\": \"main_menu_title_en_all_0\", \"top\": 410, \"left\": 90, \"width\": 214, \"height\": 31 }";
+                jsonString += ", {\"type\": \"left\", \"tag\": 1, \"title\": \"main_menu_title_en_all_1\", \"top\": 5, \"left\": 705, \"width\": 152, \"height\": 31 }";
+                jsonString += ", {\"type\": \"left\", \"tag\": 2, \"title\": \"main_menu_title_en_all_2\", \"top\": 730, \"left\": 220, \"width\": 231, \"height\": 31 }";
+                jsonString += ", {\"type\": \"left\", \"tag\": 3, \"title\": \"main_menu_title_en_all_3\", \"top\": 615, \"left\": 485, \"width\": 152, \"height\": 31 }";
+                jsonString += ", {\"type\": \"right_right\", \"tag\": 4, \"title\": \"main_menu_title_en_all_4\", \"top\": 700, \"left\": 630, \"width\": 276, \"height\": 31 }";
             }
         } else if(Helper.Version == "cut") {
                 if (Helper.Language == "zh") {
-                    jsonString += "{\"type\": \"left\", \"tag\": 0, \"title\": \"main_menu_title_zh_cut_0\", \"top\": 565, \"left\": 670, \"width\": 140, \"height\": 31 }";
-                    jsonString += ", {\"type\": \"left\", \"tag\": 1, \"title\": \"main_menu_title_zh_cut_1\", \"top\": 445, \"left\": 925, \"width\": 120, \"height\": 31 }";
+                    jsonString += "{\"type\": \"left\", \"tag\": 0, \"title\": \"main_menu_title_zh_cut_0\", \"top\": 750, \"left\": 190, \"width\": 140, \"height\": 31 }";
+                    jsonString += ", {\"type\": \"left\", \"tag\": 1, \"title\": \"main_menu_title_zh_cut_1\", \"top\": 615, \"left\": 485, \"width\": 120, \"height\": 31 }";
                 } else if (Helper.Language == "en") {
-                    jsonString += "{\"type\": \"left\", \"tag\": 0, \"title\": \"main_menu_title_en_cut_0\", \"top\": 565, \"left\": 670, \"width\": 222, \"height\": 31 }";
-                    jsonString += ", {\"type\": \"left\", \"tag\": 1, \"title\": \"main_menu_title_en_cut_1\", \"top\": 445, \"left\": 925, \"width\": 166, \"height\": 31 }";
+                    jsonString += "{\"type\": \"left\", \"tag\": 0, \"title\": \"main_menu_title_en_cut_0\", \"top\": 750, \"left\": 190, \"width\": 222, \"height\": 31 }";
+                    jsonString += ", {\"type\": \"left\", \"tag\": 1, \"title\": \"main_menu_title_en_cut_1\", \"top\": 615, \"left\": 485, \"width\": 166, \"height\": 31 }";
                 }
         }
         jsonString += "]";

@@ -1,9 +1,14 @@
 package com.nowui.crrc.view;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -18,6 +23,9 @@ public class IndexlView extends RelativeLayout {
 
     private Context myContext;
     private RelativeLayout contentRelativeLayout;
+    ImageView frameImageView;
+    private AnimationDrawable frameAnim;
+    private Handler handler = new Handler();
     private int tag;
 
     private OnClickIndexViewCloseButtonListener onClickIndexViewCloseButtonListener;
@@ -75,7 +83,6 @@ public class IndexlView extends RelativeLayout {
 
         initBackground();
 
-<<<<<<< HEAD
         if (Helper.Version == "all" && tag == 4) {
             frameImageView = new ImageView(myContext);
             frameImageView.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("frame_0", "mipmap", Helper.defPackage)));
@@ -90,8 +97,6 @@ public class IndexlView extends RelativeLayout {
             handler.postDelayed(menuRunnable, 5500);
         }
 
-=======
->>>>>>> parent of d736652... 2015-12-24 16：37
         initContent();
 
         initBackButton();
@@ -336,18 +341,16 @@ public class IndexlView extends RelativeLayout {
                     jsonString += ", {\"type\": \"left\", \"tag\": 3, \"title\": \"index_menu_title_en_all_3_3\", \"top\": 500, \"left\": 1260, \"width\": 234, \"height\": 31 }";
                 }
             } else if(tag == 4) {
-<<<<<<< HEAD
                 if (Helper.Language == "zh") {
                     jsonString += "{\"type\": \"right_right\", \"tag\": 0, \"title\": \"index_menu_title_zh_all_4_0\", \"top\": 560, \"left\": 1025, \"width\": 199, \"height\": 31 }";
                 } else if (Helper.Language == "en") {
                     jsonString += "{\"type\": \"right_right\", \"tag\": 0, \"title\": \"index_menu_title_en_all_4_0\", \"top\": 560, \"left\": 1025, \"width\": 354, \"height\": 31 }";
                 }
-=======
-                jsonString = "[{\"type\": \"right_right\", \"tag\": 0, \"title\": \"index_menu_title_" + Helper.Language + "_" + Helper.Version + "_4_0\", \"top\": 605, \"left\": 1025 }]";
->>>>>>> parent of d736652... 2015-12-24 16：37
             }
         }
         jsonString += "]";
+
+        System.out.println(jsonString);
 
         JSONArray jsonArray = JSON.parseArray(jsonString);
 
@@ -393,7 +396,6 @@ public class IndexlView extends RelativeLayout {
         contentRelativeLayout.addView(backImageButton, backImageButtonLayoutParams);
     }
 
-<<<<<<< HEAD
     private void initFrameAnim() {
         BitmapFactory.Options opts = new BitmapFactory.Options();
         opts.inSampleSize = 3;
@@ -430,7 +432,4 @@ public class IndexlView extends RelativeLayout {
             }
         }
     };
-
-=======
->>>>>>> parent of d736652... 2015-12-24 16：37
 }

@@ -118,19 +118,21 @@ public class VideoView extends RelativeLayout {
                 try {
                     if (Helper.isPublish) {
                         AssetFileDescriptor fd;
-                        if (Helper.Version == "all") {
+                        /*if (Helper.Version == "all") {
                             fd = myContext.getAssets().openFd("video_" + Helper.Language + "_" + Helper.Version + ".mp4");
                         } else {
                             fd = myContext.getAssets().openFd("video_" + Helper.Version + ".mp4");
-                        }
+                        }*/
+                        fd = myContext.getAssets().openFd("video_" + Helper.Language + "_" + Helper.Version + ".mp4");
 
                         mediaPlayer.setDataSource(fd.getFileDescriptor(), fd.getStartOffset(), fd.getLength());
                     } else {
-                        if (Helper.Version == "all") {
+                        /*if (Helper.Version == "all") {
                             mediaPlayer.setDataSource(Environment.getExternalStorageDirectory().getPath() + "/crrc/video_" + Helper.Language + "_" + Helper.Version + ".mp4");
                         } else {
                             mediaPlayer.setDataSource(Environment.getExternalStorageDirectory().getPath() + "/crrc/video_" + Helper.Version + ".mp4");
-                        }
+                        }*/
+                        mediaPlayer.setDataSource(Environment.getExternalStorageDirectory().getPath() + "/crrc/video_" + Helper.Language + "_" + Helper.Version + ".mp4");
                     }
 
                     mediaPlayer.prepare();

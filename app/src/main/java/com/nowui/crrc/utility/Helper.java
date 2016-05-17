@@ -24,11 +24,17 @@ public class Helper {
     public static int Width = 1920;
     public static int Height = 1080;
 
+    //燕房线英文版
     //public static final String defPackage = "com.nowui.crrc.en.cut";
+    //燕房线中文版
     //public static final String defPackage = "com.nowui.crrc.zh.cut";
+    //整体英文版
     //public static final String defPackage = "com.nowui.crrc.en.all";
+    //整体无宣传片英文版
     //public static final String defPackage = "com.nowui.crrc.en.all.no";
+    //整体中文版
     //public static final String defPackage = "com.nowui.crrc.zh.all";
+    //整体无宣传片中文版
     public static final String defPackage = "com.nowui.crrc.zh.all.no";
 
     public static final boolean isPublish = true;
