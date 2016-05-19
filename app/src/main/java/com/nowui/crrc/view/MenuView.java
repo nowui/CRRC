@@ -180,8 +180,8 @@ public class MenuView extends RelativeLayout {
             titleImageViewLayoutParams.leftMargin = Helper.formatPix(myContext, 70);
         }
 
-        titleImageViewLayoutParams.width = Helper.formatPix(myContext, widthInt);
-        titleImageViewLayoutParams.height = Helper.formatPix(myContext, heightInt);
+        titleImageViewLayoutParams.width = Helper.formatPix(myContext, (float)(widthInt * 1.2));
+        titleImageViewLayoutParams.height = Helper.formatPix(myContext, (float)(heightInt * 1.2));
 
         this.addView(titleImageView, titleImageViewLayoutParams);
     }

@@ -158,17 +158,17 @@ public class MainView extends RelativeLayout {
         String jsonString = "[";
         if(Helper.Version == "all") {
             if (Helper.Language == "zh") {
-                jsonString += "{\"type\": \"left\", \"tag\": 0, \"title\": \"main_menu_title_zh_all_0\", \"top\": 410, \"left\": 90, \"width\": 120, \"height\": 31 }";
+                jsonString += "{\"type\": \"left\", \"tag\": 0, \"title\": \"main_menu_title_zh_all_0\", \"top\": 430, \"left\": 120, \"width\": 120, \"height\": 31 }";
                 jsonString += ", {\"type\": \"left\", \"tag\": 1, \"title\": \"main_menu_title_zh_all_1\", \"top\": 5, \"left\": 705, \"width\": 120, \"height\": 31 }";
-                jsonString += ", {\"type\": \"left\", \"tag\": 2, \"title\": \"main_menu_title_zh_all_2\", \"top\": 730, \"left\": 220, \"width\": 139, \"height\": 31 }";
-                jsonString += ", {\"type\": \"left\", \"tag\": 3, \"title\": \"main_menu_title_zh_all_3\", \"top\": 615, \"left\": 485, \"width\": 110, \"height\": 31 }";
-                jsonString += ", {\"type\": \"right_right\", \"tag\": 4, \"title\": \"main_menu_title_zh_all_4\", \"top\": 700, \"left\": 630, \"width\": 140, \"height\": 31 }";
+                jsonString += ", {\"type\": \"left\", \"tag\": 2, \"title\": \"main_menu_title_zh_all_2\", \"top\": 690, \"left\": 365, \"width\": 139, \"height\": 31 }";
+                jsonString += ", {\"type\": \"left\", \"tag\": 3, \"title\": \"main_menu_title_zh_all_3\", \"top\": 580, \"left\": 600, \"width\": 110, \"height\": 31 }";
+                jsonString += ", {\"type\": \"right_right\", \"tag\": 4, \"title\": \"main_menu_title_zh_all_4\", \"top\": 655, \"left\": 720, \"width\": 140, \"height\": 31 }";
             } else if (Helper.Language == "en") {
-                jsonString += "{\"type\": \"left\", \"tag\": 0, \"title\": \"main_menu_title_en_all_0\", \"top\": 410, \"left\": 90, \"width\": 214, \"height\": 31 }";
+                jsonString += "{\"type\": \"left\", \"tag\": 0, \"title\": \"main_menu_title_en_all_0\", \"top\": 430, \"left\": 120, \"width\": 214, \"height\": 31 }";
                 jsonString += ", {\"type\": \"left\", \"tag\": 1, \"title\": \"main_menu_title_en_all_1\", \"top\": 5, \"left\": 705, \"width\": 152, \"height\": 31 }";
-                jsonString += ", {\"type\": \"left\", \"tag\": 2, \"title\": \"main_menu_title_en_all_2\", \"top\": 730, \"left\": 220, \"width\": 231, \"height\": 31 }";
-                jsonString += ", {\"type\": \"left\", \"tag\": 3, \"title\": \"main_menu_title_en_all_3\", \"top\": 615, \"left\": 485, \"width\": 152, \"height\": 31 }";
-                jsonString += ", {\"type\": \"right_right\", \"tag\": 4, \"title\": \"main_menu_title_en_all_4\", \"top\": 700, \"left\": 630, \"width\": 276, \"height\": 31 }";
+                jsonString += ", {\"type\": \"left\", \"tag\": 2, \"title\": \"main_menu_title_en_all_2\", \"top\": 690, \"left\": 365, \"width\": 231, \"height\": 31 }";
+                jsonString += ", {\"type\": \"left\", \"tag\": 3, \"title\": \"main_menu_title_en_all_3\", \"top\": 580, \"left\": 600, \"width\": 152, \"height\": 31 }";
+                jsonString += ", {\"type\": \"right_right\", \"tag\": 4, \"title\": \"main_menu_title_en_all_4\", \"top\": 655, \"left\": 720, \"width\": 276, \"height\": 31 }";
             }
         } else if(Helper.Version == "cut") {
                 if (Helper.Language == "zh") {
@@ -236,8 +236,8 @@ public class MainView extends RelativeLayout {
         } else {
             homeImageViewLayoutParams.rightMargin = Helper.formatPix(myContext, 30 + 76 + 30 + 76 + 30);
         }
-        homeImageViewLayoutParams.width = Helper.formatPix(myContext, 76);
-        homeImageViewLayoutParams.height = Helper.formatPix(myContext, 76);
+        homeImageViewLayoutParams.width = Helper.formatPix(myContext, (float)(76 * 1.2));
+        homeImageViewLayoutParams.height = Helper.formatPix(myContext, (float)(76 * 1.2));
         contentRelativeLayout.addView(homeImageView, homeImageViewLayoutParams);
     }
 
@@ -258,8 +258,8 @@ public class MainView extends RelativeLayout {
         videoImageViewLayoutParams.bottomMargin = Helper.formatPix(myContext, 30);
         videoImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         videoImageViewLayoutParams.rightMargin = Helper.formatPix(myContext, 30 + 76 + 30);
-        videoImageViewLayoutParams.width = Helper.formatPix(myContext, 76);
-        videoImageViewLayoutParams.height = Helper.formatPix(myContext, 76);
+        videoImageViewLayoutParams.width = Helper.formatPix(myContext, (float)(76 * 1.2));
+        videoImageViewLayoutParams.height = Helper.formatPix(myContext, (float)(76 * 1.2));
         contentRelativeLayout.addView(videoImageView, videoImageViewLayoutParams);
     }
 
@@ -280,8 +280,8 @@ public class MainView extends RelativeLayout {
         quitImageViewLayoutParams.bottomMargin = Helper.formatPix(myContext, 30);
         quitImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         quitImageViewLayoutParams.rightMargin = Helper.formatPix(myContext, 30);
-        quitImageViewLayoutParams.width = Helper.formatPix(myContext, 76);
-        quitImageViewLayoutParams.height = Helper.formatPix(myContext, 76);
+        quitImageViewLayoutParams.width = Helper.formatPix(myContext, (float)(76 * 1.2));
+        quitImageViewLayoutParams.height = Helper.formatPix(myContext, (float)(76 * 1.2));
         contentRelativeLayout.addView(quitImageView, quitImageViewLayoutParams);
 
 

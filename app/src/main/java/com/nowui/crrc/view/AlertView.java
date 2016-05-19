@@ -25,7 +25,10 @@ public class AlertView extends RelativeLayout {
     private int pagerTag;
     private int parent;
     private int selectInt = -1;
-    private ImageView titleImageView;
+    private ImageView title0ImageView;
+    private ImageView title1ImageView;
+    private ImageView title2ImageView;
+    private ImageView title3ImageView;
     private RelativeLayout tabContentRelativeLayout;
     private RelativeLayout scrollViewContentRelativeLayout;
 
@@ -303,18 +306,74 @@ public class AlertView extends RelativeLayout {
             width = 300;
         }
 
-        titleImageView = new ImageView(myContext);
-        titleImageView.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("detail_title_" + Helper.Language + "_" + Helper.Version + "_" + parent + "_" + tag + "_" + pagerTag, "mipmap", Helper.defPackage)));
-        titleImageView.setScaleType(ImageView.ScaleType.FIT_START);
+        title0ImageView = new ImageView(myContext);
+        title0ImageView.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("detail_title_" + Helper.Language + "_" + Helper.Version + "_" + parent + "_" + tag + "_" + pagerTag, "mipmap", Helper.defPackage)));
+        title0ImageView.setScaleType(ImageView.ScaleType.FIT_START);
 
-        RelativeLayout.LayoutParams titleImageViewLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        titleImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-        titleImageViewLayoutParams.topMargin = Helper.formatPix(myContext, 255);
-        titleImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-        titleImageViewLayoutParams.leftMargin = Helper.formatPix(myContext, 160);
-        titleImageViewLayoutParams.width = Helper.formatPix(myContext, width);
-        titleImageViewLayoutParams.height = Helper.formatPix(myContext, height);
-        contentRelativeLayout.addView(titleImageView, titleImageViewLayoutParams);
+        RelativeLayout.LayoutParams title0ImageViewLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        title0ImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+        title0ImageViewLayoutParams.topMargin = Helper.formatPix(myContext, 255);
+        title0ImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+        title0ImageViewLayoutParams.leftMargin = Helper.formatPix(myContext, 160);
+        title0ImageViewLayoutParams.width = Helper.formatPix(myContext, width);
+        title0ImageViewLayoutParams.height = Helper.formatPix(myContext, height);
+        contentRelativeLayout.addView(title0ImageView, title0ImageViewLayoutParams);
+
+        title1ImageView = new ImageView(myContext);
+        title1ImageView.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("detail_title_" + Helper.Language + "_1", "mipmap", Helper.defPackage)));
+        title1ImageView.setScaleType(ImageView.ScaleType.FIT_START);
+
+        RelativeLayout.LayoutParams title1ImageViewLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        title1ImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+        title1ImageViewLayoutParams.topMargin = Helper.formatPix(myContext, 255);
+        title1ImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+        title1ImageViewLayoutParams.leftMargin = Helper.formatPix(myContext, 160);
+        if (Helper.Language == "zh") {
+            title1ImageViewLayoutParams.width = Helper.formatPix(myContext, 242);
+            title1ImageViewLayoutParams.height = Helper.formatPix(myContext, 55);
+        } else {
+            title1ImageViewLayoutParams.width = Helper.formatPix(myContext, 489);
+            title1ImageViewLayoutParams.height = Helper.formatPix(myContext, 55);
+        }
+        contentRelativeLayout.addView(title1ImageView, title1ImageViewLayoutParams);
+
+        title2ImageView = new ImageView(myContext);
+        title2ImageView.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("detail_title_" + Helper.Language + "_2", "mipmap", Helper.defPackage)));
+        title2ImageView.setScaleType(ImageView.ScaleType.FIT_START);
+
+        RelativeLayout.LayoutParams title2ImageViewLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        title2ImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+        title2ImageViewLayoutParams.topMargin = Helper.formatPix(myContext, 255);
+        title2ImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+        title2ImageViewLayoutParams.leftMargin = Helper.formatPix(myContext, 160);
+        title2ImageViewLayoutParams.width = Helper.formatPix(myContext, 140);
+        title2ImageViewLayoutParams.height = Helper.formatPix(myContext, 55);
+        if (Helper.Language == "zh") {
+            title2ImageViewLayoutParams.width = Helper.formatPix(myContext, 140);
+            title2ImageViewLayoutParams.height = Helper.formatPix(myContext, 55);
+        } else {
+            title2ImageViewLayoutParams.width = Helper.formatPix(myContext, 412);
+            title2ImageViewLayoutParams.height = Helper.formatPix(myContext, 55);
+        }
+        contentRelativeLayout.addView(title2ImageView, title2ImageViewLayoutParams);
+
+        title3ImageView = new ImageView(myContext);
+        title3ImageView.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("detail_title_" + Helper.Language + "_3", "mipmap", Helper.defPackage)));
+        title3ImageView.setScaleType(ImageView.ScaleType.FIT_START);
+
+        RelativeLayout.LayoutParams title3ImageViewLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        title3ImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+        title3ImageViewLayoutParams.topMargin = Helper.formatPix(myContext, 255);
+        title3ImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+        title3ImageViewLayoutParams.leftMargin = Helper.formatPix(myContext, 160);
+        if (Helper.Language == "zh") {
+            title3ImageViewLayoutParams.width = Helper.formatPix(myContext, 140);
+            title3ImageViewLayoutParams.height = Helper.formatPix(myContext, 55);
+        } else {
+            title3ImageViewLayoutParams.width = Helper.formatPix(myContext, 402);
+            title3ImageViewLayoutParams.height = Helper.formatPix(myContext, 55);
+        }
+        contentRelativeLayout.addView(title3ImageView, title3ImageViewLayoutParams);
 
         RelativeLayout pictureContentRelativeLayout = new RelativeLayout(myContext);
 
@@ -561,12 +620,13 @@ public class AlertView extends RelativeLayout {
             RelativeLayout.LayoutParams tabImageViewLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
             tabImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
             tabImageViewLayoutParams.leftMargin = Helper.formatPix(myContext, 120 * i);
-            tabImageViewLayoutParams.width = Helper.formatPix(myContext, 75);
-            tabImageViewLayoutParams.height = Helper.formatPix(myContext, 75);
+            tabImageViewLayoutParams.width = Helper.formatPix(myContext, (float)(75 * 1.2));
+            tabImageViewLayoutParams.height = Helper.formatPix(myContext, (float)(75 * 1.2));
             tabContentRelativeLayout.addView(tabImageView, tabImageViewLayoutParams);
         }
 
         ScrollView introductionScrollView = new ScrollView(myContext);
+        introductionScrollView.setScrollbarFadingEnabled(false);
 
         RelativeLayout.LayoutParams introductionScrollViewLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         introductionScrollViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
@@ -615,10 +675,32 @@ public class AlertView extends RelativeLayout {
 
         selectInt = position;
 
-        if (selectInt == 0) {
+        /*if (selectInt == 0) {
             titleImageView.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("detail_title_" + Helper.Language + "_" + Helper.Version + "_" + parent + "_" + tag + "_" + pagerTag, "mipmap", Helper.defPackage)));
         } else {
             titleImageView.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("detail_title_" + Helper.Language + "_" + selectInt, "mipmap", Helper.defPackage)));
+        }*/
+
+        if (selectInt == 0) {
+            title0ImageView.setVisibility(View.VISIBLE);
+            title1ImageView.setVisibility(View.INVISIBLE);
+            title2ImageView.setVisibility(View.INVISIBLE);
+            title3ImageView.setVisibility(View.INVISIBLE);
+        } else if (selectInt == 1) {
+            title0ImageView.setVisibility(View.INVISIBLE);
+            title1ImageView.setVisibility(View.VISIBLE);
+            title2ImageView.setVisibility(View.INVISIBLE);
+            title3ImageView.setVisibility(View.INVISIBLE);
+        } else if (selectInt == 2) {
+            title0ImageView.setVisibility(View.INVISIBLE);
+            title1ImageView.setVisibility(View.INVISIBLE);
+            title2ImageView.setVisibility(View.VISIBLE);
+            title3ImageView.setVisibility(View.INVISIBLE);
+        } else if (selectInt == 3) {
+            title0ImageView.setVisibility(View.INVISIBLE);
+            title1ImageView.setVisibility(View.INVISIBLE);
+            title2ImageView.setVisibility(View.INVISIBLE);
+            title3ImageView.setVisibility(View.VISIBLE);
         }
 
         for(int i = 0; i < tabContentRelativeLayout.getChildCount(); i++) {
@@ -1614,8 +1696,8 @@ public class AlertView extends RelativeLayout {
         introductionImageViewLayoutParams.topMargin = Helper.formatPix(myContext, 0);
         introductionImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
         introductionImageViewLayoutParams.leftMargin = Helper.formatPix(myContext, 0);
-        introductionImageViewLayoutParams.width = Helper.formatPix(myContext, width);
-        introductionImageViewLayoutParams.height = Helper.formatPix(myContext, height);
+        introductionImageViewLayoutParams.width = Helper.formatPix(myContext, (float)(width * 1.2));
+        introductionImageViewLayoutParams.height = Helper.formatPix(myContext, (float)(height * 1.2));
 
         scrollViewContentRelativeLayout.addView(introductionImageView, introductionImageViewLayoutParams);
     }

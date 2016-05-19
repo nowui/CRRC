@@ -217,7 +217,7 @@ public class MainActivity extends Activity {
             }
             case MotionEvent.ACTION_UP: {
                 if (mainView.getVisibility() == View.VISIBLE) {
-                    handler.sendEmptyMessageDelayed(SHOW_ANOTHER_ACTIVITY, 1000 * 60 * 5);
+                    handler.sendEmptyMessageDelayed(SHOW_ANOTHER_ACTIVITY, 1000 * 60 * 1);
                 }
                 break;
             }

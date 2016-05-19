@@ -92,74 +92,72 @@ public class LoadView extends RelativeLayout {
         holder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
         holder.setFixedSize(surfaceViewLayoutParams.width, surfaceViewLayoutParams.height);
         holder.addCallback(new SurfaceHolder.Callback() {
-                               @Override
-                               public void surfaceCreated(SurfaceHolder holder) {
-                                   mediaPlayer = new MediaPlayer();
-                                   mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                                       @Override
-                                       public void onPrepared(MediaPlayer mp) {
+               @Override
+               public void surfaceCreated(SurfaceHolder holder) {
+                   mediaPlayer = new MediaPlayer();
+                   mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                       @Override
+                       public void onPrepared(MediaPlayer mp) {
 
-                                       }
-                                   });
-                                   mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                                       @Override
-                                       public void onCompletion(MediaPlayer mp) {
+                       }
+                   });
+                   mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                       @Override
+                       public void onCompletion(MediaPlayer mp) {
 
-                                       }
-                                   });
-                                   mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                                   mediaPlayer.setDisplay(holder);
+                       }
+                   });
+                   mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                   mediaPlayer.setDisplay(holder);
 
-                                   try {
-                                       if (Helper.isPublish) {
-                                           AssetFileDescriptor fd;
-                                           if (Helper.Version == "all") {
-                                               if (Helper.isAd) {
-                                                   fd = myContext.getAssets().openFd("load_" + Helper.Language + "_" + Helper.Version + ".mp4");
-                                               } else {
-                                                   if (isLoad) {
-                                                       fd = myContext.getAssets().openFd("video_" + Helper.Language + "_" + Helper.Version + ".mp4");
-                                                   } else {
-                                                       fd = myContext.getAssets().openFd("load_" + Helper.Language + "_" + Helper.Version + ".mp4");
-                                                   }
-                                               }
-                                           } else {
-                                               fd = myContext.getAssets().openFd("video_" + Helper.Version + ".mp4");
-                                           }
-
-                                           mediaPlayer.setDataSource(fd.getFileDescriptor(), fd.getStartOffset(), fd.getLength());
-                                       } else {
-                                           if (Helper.Version == "all") {
-                                               mediaPlayer.setDataSource(Environment.getExternalStorageDirectory().getPath() + "/crrc/load_" + Helper.Language + "_" + Helper.Version + ".mp4");
-                                           } else {
-                                               mediaPlayer.setDataSource(Environment.getExternalStorageDirectory().getPath() + "/crrc/video_" + Helper.Version + ".mp4");
-                                           }
-                                       }
-
-                                       mediaPlayer.prepare();
-                                       mediaPlayer.setVolume(1.0F, 1.0F);
-                                       mediaPlayer.setLooping(true);
-                                       mediaPlayer.start();
-                                   } catch (IOException e) {
-                                       e.printStackTrace();
+                   try {
+                       if (Helper.isPublish) {
+                           AssetFileDescriptor fd;
+                           if (Helper.Version == "all") {
+                               if (Helper.isAd) {
+                                   fd = myContext.getAssets().openFd("load_" + Helper.Language + "_" + Helper.Version + ".mp4");
+                               } else {
+                                   if (isLoad) {
+                                       fd = myContext.getAssets().openFd("video_" + Helper.Language + "_" + Helper.Version + ".mp4");
+                                   } else {
+                                       fd = myContext.getAssets().openFd("load_" + Helper.Language + "_" + Helper.Version + ".mp4");
                                    }
                                }
-
-                               @Override
-                               public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-
-                               }
-
-                               @Override
-                               public void surfaceDestroyed(SurfaceHolder holder) {
-                                   if (mediaPlayer.isPlaying()) {
-                                       mediaPlayer.stop();
-                                   }
-                                   mediaPlayer.release();
-                               }
+                           } else {
+                               fd = myContext.getAssets().openFd("video_" + Helper.Version + ".mp4");
                            }
 
-        );
+                           mediaPlayer.setDataSource(fd.getFileDescriptor(), fd.getStartOffset(), fd.getLength());
+                       } else {
+                           if (Helper.Version == "all") {
+                               mediaPlayer.setDataSource(Environment.getExternalStorageDirectory().getPath() + "/crrc/load_" + Helper.Language + "_" + Helper.Version + ".mp4");
+                           } else {
+                               mediaPlayer.setDataSource(Environment.getExternalStorageDirectory().getPath() + "/crrc/video_" + Helper.Version + ".mp4");
+                           }
+                       }
+
+                       mediaPlayer.prepare();
+                       mediaPlayer.setVolume(1.0F, 1.0F);
+                       mediaPlayer.setLooping(true);
+                       mediaPlayer.start();
+                   } catch (IOException e) {
+                       e.printStackTrace();
+                   }
+               }
+
+               @Override
+               public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+
+               }
+
+               @Override
+               public void surfaceDestroyed(SurfaceHolder holder) {
+                   if (mediaPlayer.isPlaying()) {
+                       mediaPlayer.stop();
+                   }
+                   mediaPlayer.release();
+               }
+           } );
 
             closeImageButton=new
 
@@ -169,22 +167,18 @@ public class LoadView extends RelativeLayout {
 
             setAlpha(0);
 
-            closeImageButton.setOnClickListener(new
+            closeImageButton.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onOnCompletionListener != null) {
+                        if (mediaPlayer.isPlaying()) {
+                            mediaPlayer.stop();
+                        }
 
-                                                        OnClickListener() {
-                                                            @Override
-                                                            public void onClick(View v) {
-                                                                if (onOnCompletionListener != null) {
-                                                                    if (mediaPlayer.isPlaying()) {
-                                                                        mediaPlayer.stop();
-                                                                    }
-
-                                                                    onOnCompletionListener.OnTrigger();
-                                                                }
-                                                            }
-                                                        }
-
-            );
+                        onOnCompletionListener.OnTrigger();
+                    }
+                }
+            });
 
             RelativeLayout.LayoutParams closeImageButtonLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
             contentRelativeLayout.addView(closeImageButton, closeImageButtonLayoutParams);

@@ -195,8 +195,8 @@ public class VideoView extends RelativeLayout {
         skipImageViewLayoutParams.bottomMargin = Helper.formatPix(myContext, 30);
         skipImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         skipImageViewLayoutParams.rightMargin = Helper.formatPix(myContext, 30);
-        skipImageViewLayoutParams.width = Helper.formatPix(myContext, 76);
-        skipImageViewLayoutParams.height = Helper.formatPix(myContext, 76);
+        skipImageViewLayoutParams.width = Helper.formatPix(myContext, (float)(76 * 1.2));
+        skipImageViewLayoutParams.height = Helper.formatPix(myContext, (float)(76 * 1.2));
         contentRelativeLayout.addView(skipImageView, skipImageViewLayoutParams);
     }
 

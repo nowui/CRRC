@@ -118,60 +118,60 @@ public class IndexlView extends RelativeLayout {
         ImageView titleImageView = new ImageView(myContext);
         titleImageView.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("index_title_" + Helper.Language + "_" + Helper.Version + "_" + tag, "mipmap", Helper.defPackage)));
 
-        int with = 0;
+        int width = 0;
         int height = 0;
 
         if(Helper.Version == "all") {
             if (Helper.Language == "zh") {
                 if (tag == 0) {
-                    with = 229;
+                    width = 229;
                     height = 165;
                 } else if (tag == 1) {
-                    with = 229;
+                    width = 229;
                     height = 165;
                 } else if (tag == 2) {
-                    with = 309;
+                    width = 309;
                     height = 165;
                 } else if (tag == 3) {
-                    with = 229;
+                    width = 229;
                     height = 165;
                 } else if (tag == 4) {
-                    with = 269;
+                    width = 269;
                     height = 165;
                 }
             } else if (Helper.Language == "en") {
                 if (tag == 0) {
-                    with = 463;
+                    width = 463;
                     height = 165;
                 } else if (tag == 1) {
-                    with = 324;
+                    width = 324;
                     height = 165;
                 } else if (tag == 2) {
-                    with = 534;
+                    width = 534;
                     height = 165;
                 } else if (tag == 3) {
-                    with = 352;
+                    width = 352;
                     height = 165;
                 } else if (tag == 4) {
-                    with = 853;
+                    width = 853;
                     height = 165;
                 }
             }
         } else if(Helper.Version == "cut") {
             if (Helper.Language == "zh") {
                 if (tag == 0) {
-                    with = 309;
+                    width = 309;
                     height = 207;
                 } else if (tag == 1) {
-                    with = 229;
+                    width = 229;
                     height = 207;
                 }
             } else if (Helper.Language == "en") {
                 if (tag == 0) {
-                    with = 514;
+                    width = 514;
                     height = 207;
                 } else if (tag == 1) {
-                    with = 360;
+                    width = 360;
                     height = 207;
                 }
             }
@@ -182,46 +182,46 @@ public class IndexlView extends RelativeLayout {
         titleImageViewLayoutParams.topMargin = Helper.formatPix(myContext, 40);
         titleImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
         titleImageViewLayoutParams.leftMargin = Helper.formatPix(myContext, 0);
-        titleImageViewLayoutParams.width = Helper.formatPix(myContext, with);
+        titleImageViewLayoutParams.width = Helper.formatPix(myContext, width);
         titleImageViewLayoutParams.height = Helper.formatPix(myContext, height);
         contentRelativeLayout.addView(titleImageView, titleImageViewLayoutParams);
 
         if (Helper.Version == "all") {
-            with = 0;
+            width = 0;
             height = 0;
 
             if (Helper.Language == "zh") {
                 if (tag == 0) {
-                    with = 580;
+                    width = 580;
                     height = 161;
                 } else if (tag == 1) {
-                    with = 460;
+                    width = 460;
                     height = 371;
                 } else if (tag == 2) {
-                    with = 620;
+                    width = 620;
                     height = 77;
                 } else if (tag == 3) {
-                    with = 580;
+                    width = 580;
                     height = 387;
                 } else if (tag == 4) {
-                    with = 580;
+                    width = 580;
                     height = 119;
                 }
             } else if (Helper.Language == "en") {
                 if (tag == 0) {
-                    with = 480;
+                    width = 480;
                     height = 371;
                 } else if (tag == 1) {
-                    with = 460;
+                    width = 460;
                     height = 620;
                 } else if (tag == 2) {
-                    with = 620;
+                    width = 620;
                     height = 161;
                 } else if (tag == 3) {
-                    with = 400;
+                    width = 400;
                     height = 553;
                 } else if (tag == 4) {
-                    with = 580;
+                    width = 580;
                     height = 245;
                 }
             }
@@ -234,8 +234,8 @@ public class IndexlView extends RelativeLayout {
             textImageViewLayoutParams.topMargin = Helper.formatPix(myContext, 250);
             textImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
             textImageViewLayoutParams.leftMargin = Helper.formatPix(myContext, 75);
-            textImageViewLayoutParams.width = Helper.formatPix(myContext, with);
-            textImageViewLayoutParams.height = Helper.formatPix(myContext, height);
+            textImageViewLayoutParams.width = Helper.formatPix(myContext, (float)(width * 1.2));
+            textImageViewLayoutParams.height = Helper.formatPix(myContext, (float)(height * 1.2));
             contentRelativeLayout.addView(textImageView, textImageViewLayoutParams);
         }
 
@@ -391,8 +391,8 @@ public class IndexlView extends RelativeLayout {
         backImageButtonLayoutParams.bottomMargin = Helper.formatPix(myContext, 30);
         backImageButtonLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         backImageButtonLayoutParams.rightMargin = Helper.formatPix(myContext, 30);
-        backImageButtonLayoutParams.width = Helper.formatPix(myContext, 76);
-        backImageButtonLayoutParams.height = Helper.formatPix(myContext, 76);
+        backImageButtonLayoutParams.width = Helper.formatPix(myContext, (float)(76 * 1.2));
+        backImageButtonLayoutParams.height = Helper.formatPix(myContext, (float)(76 * 1.2));
         contentRelativeLayout.addView(backImageButton, backImageButtonLayoutParams);
     }
 
