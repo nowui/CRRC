@@ -97,6 +97,8 @@ public class MainActivity extends Activity {
         slImageViewLayoutParams.width = Helper.formatPix(this, 500);
         slImageViewLayoutParams.height = Helper.formatPix(this, 107);
         contentRelativeLayout.addView(slImageView, slImageViewLayoutParams);*/
+
+        handler.sendEmptyMessageDelayed(SHOW_ANOTHER_ACTIVITY, 1000 * 60 * 1);
     }
 
     @Override
@@ -216,9 +218,7 @@ public class MainActivity extends Activity {
                 break;
             }
             case MotionEvent.ACTION_UP: {
-                if (mainView.getVisibility() == View.VISIBLE) {
-                    handler.sendEmptyMessageDelayed(SHOW_ANOTHER_ACTIVITY, 1000 * 60 * 1);
-                }
+                handler.sendEmptyMessageDelayed(SHOW_ANOTHER_ACTIVITY, 1000 * 60 * 1);
                 break;
             }
         }

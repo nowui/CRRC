@@ -33,9 +33,9 @@ public class Helper {
     //整体无宣传片英文版
     //public static final String defPackage = "com.nowui.crrc.en.all.no";
     //整体中文版
-    public static final String defPackage = "com.nowui.crrc.zh.all";
+    //public static final String defPackage = "com.nowui.crrc.zh.all";
     //整体无宣传片中文版
-    //public static final String defPackage = "com.nowui.crrc.zh.all.no";
+    public static final String defPackage = "com.nowui.crrc.zh.all.no";
 
     public static final boolean isPublish = true;
     //public static final boolean isPublish = false;

@@ -5,7 +5,7 @@ android {
     buildToolsVersion "22.0.1"
 
     defaultConfig {
-        applicationId "com.nowui.crrc.zh.all"
+        applicationId "com.nowui.crrc.zh.all.no"
         minSdkVersion 15
         targetSdkVersion 22
         versionCode 1

@@ -604,7 +604,7 @@ public class AlertView extends RelativeLayout {
         int total = 3;
 
         if (Helper.Version == "all") {
-            total = 4;
+            //total = 4;
         }
 
         for(int i = 0; i < total; i++) {
@@ -632,8 +632,8 @@ public class AlertView extends RelativeLayout {
         introductionScrollViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
         introductionScrollViewLayoutParams.topMargin = Helper.formatPix(myContext, 420);
         introductionScrollViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-        introductionScrollViewLayoutParams.leftMargin = Helper.formatPix(myContext, 183);
-        introductionScrollViewLayoutParams.width = Helper.formatPix(myContext, 700);
+        introductionScrollViewLayoutParams.leftMargin = Helper.formatPix(myContext, 173);
+        introductionScrollViewLayoutParams.width = Helper.formatPix(myContext, 755);
         introductionScrollViewLayoutParams.height = Helper.formatPix(myContext, 295);
         contentRelativeLayout.addView(introductionScrollView, introductionScrollViewLayoutParams);
 
@@ -934,7 +934,7 @@ public class AlertView extends RelativeLayout {
                                 width = 570;
                                 height = 68;
                             } else if (position == 1) {
-                                width = 686;
+                                width = 581;
                                 height = 766;
                             } else if (position == 2) {
                                 width = 453;
@@ -1696,8 +1696,8 @@ public class AlertView extends RelativeLayout {
         introductionImageViewLayoutParams.topMargin = Helper.formatPix(myContext, 0);
         introductionImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
         introductionImageViewLayoutParams.leftMargin = Helper.formatPix(myContext, 0);
-        introductionImageViewLayoutParams.width = Helper.formatPix(myContext, (float)(width * 1.2));
-        introductionImageViewLayoutParams.height = Helper.formatPix(myContext, (float)(height * 1.2));
+        introductionImageViewLayoutParams.width = Helper.formatPix(myContext, (float)(width * 1.15));
+        introductionImageViewLayoutParams.height = Helper.formatPix(myContext, (float)(height * 1.15));
 
         scrollViewContentRelativeLayout.addView(introductionImageView, introductionImageViewLayoutParams);
     }

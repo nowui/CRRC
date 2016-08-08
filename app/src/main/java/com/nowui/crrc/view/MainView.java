@@ -172,11 +172,11 @@ public class MainView extends RelativeLayout {
             }
         } else if(Helper.Version == "cut") {
                 if (Helper.Language == "zh") {
-                    jsonString += "{\"type\": \"left\", \"tag\": 0, \"title\": \"main_menu_title_zh_cut_0\", \"top\": 750, \"left\": 190, \"width\": 140, \"height\": 31 }";
-                    jsonString += ", {\"type\": \"left\", \"tag\": 1, \"title\": \"main_menu_title_zh_cut_1\", \"top\": 615, \"left\": 485, \"width\": 120, \"height\": 31 }";
+                    jsonString += "{\"type\": \"left\", \"tag\": 0, \"title\": \"main_menu_title_zh_cut_0\", \"top\": 670, \"left\": 365, \"width\": 140, \"height\": 31 }";
+                    jsonString += ", {\"type\": \"left\", \"tag\": 1, \"title\": \"main_menu_title_zh_cut_1\", \"top\": 565, \"left\": 630, \"width\": 120, \"height\": 31 }";
                 } else if (Helper.Language == "en") {
-                    jsonString += "{\"type\": \"left\", \"tag\": 0, \"title\": \"main_menu_title_en_cut_0\", \"top\": 750, \"left\": 190, \"width\": 222, \"height\": 31 }";
-                    jsonString += ", {\"type\": \"left\", \"tag\": 1, \"title\": \"main_menu_title_en_cut_1\", \"top\": 615, \"left\": 485, \"width\": 166, \"height\": 31 }";
+                    jsonString += "{\"type\": \"left\", \"tag\": 0, \"title\": \"main_menu_title_en_cut_0\", \"top\": 670, \"left\": 365, \"width\": 222, \"height\": 31 }";
+                    jsonString += ", {\"type\": \"left\", \"tag\": 1, \"title\": \"main_menu_title_en_cut_1\", \"top\": 565, \"left\": 630, \"width\": 166, \"height\": 31 }";
                 }
         }
         jsonString += "]";
