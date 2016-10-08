@@ -25,7 +25,7 @@ public class Helper {
     public static int Height = 1080;
 
     //燕房线英文版
-    //public static final String defPackage = "com.nowui.crrc.en.cut";
+    public static final String defPackage = "com.nowui.crrc.en.cut";
     //燕房线中文版
     //public static final String defPackage = "com.nowui.crrc.zh.cut";
     //整体英文版
@@ -35,16 +35,16 @@ public class Helper {
     //整体中文版
     //public static final String defPackage = "com.nowui.crrc.zh.all";
     //整体无宣传片中文版
-    public static final String defPackage = "com.nowui.crrc.zh.all.no";
+    //public static final String defPackage = "com.nowui.crrc.zh.all.no";
 
     public static final boolean isPublish = true;
     //public static final boolean isPublish = false;
 
-    //public static final String Language = "en";
-    public static final String Language = "zh";
+    public static final String Language = "en";
+    //public static final String Language = "zh";
 
-    //public static final String Version = "cut";
-    public static final String Version = "all";
+    public static final String Version = "cut";
+    //public static final String Version = "all";
 
     public static final boolean isAd = true;
     //public static final boolean isAd = false;
